@@ -162,6 +162,8 @@ public class Homepage extends javax.swing.JFrame {
         pPhoneTable = new javax.swing.JTable();
         jScrollPane9 = new javax.swing.JScrollPane();
         pContactTable = new javax.swing.JTable();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        pTotalCharge = new javax.swing.JTable();
         updatePatientTab = new javax.swing.JPanel();
         pFNameLab = new javax.swing.JLabel();
         pFName = new javax.swing.JTextField();
@@ -840,6 +842,21 @@ public class Homepage extends javax.swing.JFrame {
 
         allPatients.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, 200, 50));
 
+        pTotalCharge.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane10.setViewportView(pTotalCharge);
+
+        allPatients.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, 170, 50));
+
         patientMultTab.addTab("All Patients", allPatients);
 
         updatePatientTab.setBackground(new java.awt.Color(219, 196, 113));
@@ -1443,7 +1460,7 @@ public class Homepage extends javax.swing.JFrame {
         pTreatments.setModel(makeTable("SELECT treatment as Treatment FROM Person, Care_Treatment WHERE SSN='"+SSN+"' AND SSN=pSSN"));
         pBills.setModel(makeTable("SELECT bill as 'Bill Number', description as 'Description', amount as Amount FROM Person, Bill_Charges WHERE SSN='"+SSN+"' AND SSN=pSSN;"));
         
-        
+        pTotalCharge.setModel(makeTable("SELECT SUM(bc.amount) as 'Total Charge' FROM Person p, Patient pat, Bill_Charges bc WHERE p.SSN = '"+SSN+"' AND p.SSN=pat.pSSN AND p.SSN=bc.pSSN GROUP BY SSN"));
         patientUpdateButton.setEnabled(true);
         }
         else{
@@ -1598,7 +1615,8 @@ public class Homepage extends javax.swing.JFrame {
             s.insert("INSERT INTO Bill_Charges VALUES("+charge+")");
         }
         pBills.setModel(makeTable("SELECT bill as 'Bill Number', description as 'Description', amount as Amount FROM Person, Bill_Charges WHERE SSN='"+SSN+"' AND SSN=pSSN;"));
-        updateTables();
+        pTotalCharge.setModel(makeTable("SELECT SUM(bc.amount) as 'Total Charge' FROM Person p, Patient pat, Bill_Charges bc WHERE p.SSN = '"+SSN+"' AND p.SSN=pat.pSSN AND p.SSN=bc.pSSN GROUP BY SSN"));
+
     }//GEN-LAST:event_pChargeButtonActionPerformed
 
     private void hButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hButtonActionPerformed
@@ -1842,6 +1860,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1896,6 +1915,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JTextField pStreet2;
     private javax.swing.JLabel pStreet2Lab;
     private javax.swing.JLabel pStreetLab;
+    private javax.swing.JTable pTotalCharge;
     private javax.swing.JTextField pTreat;
     private javax.swing.JButton pTreatButton;
     private javax.swing.JTable pTreatments;
