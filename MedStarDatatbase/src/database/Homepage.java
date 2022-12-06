@@ -18,7 +18,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 
-
+import java.net.URL;
 
 /**
  *
@@ -38,11 +38,13 @@ public class Homepage extends javax.swing.JFrame {
     }
     
     public void resizeImage() {
-        ImageIcon icon =  new ImageIcon("src/database/2560px-MedStar_Health_logo.svg.png");
+        URL url = this.getClass().getResource("/database/2560px-MedStar_Health_logo.svg.png");
+        ImageIcon icon =  new javax.swing.ImageIcon(url);
         Image img = icon.getImage();
         Image imgScaled = img.getScaledInstance(loginLabel.getWidth(), loginLabel.getHeight(), Image.SCALE_DEFAULT);
         ImageIcon scaled = new ImageIcon(imgScaled);
         loginLabel.setIcon(scaled);
+        
     }
     
     /**
@@ -295,7 +297,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(627, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.add(loginPanel, "login");
@@ -1869,7 +1871,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    public javax.swing.JLabel loginLabel;
+    private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextField pAmount;
