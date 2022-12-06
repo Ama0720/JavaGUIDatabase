@@ -53,7 +53,7 @@ public class Homepage extends javax.swing.JFrame {
         sLNameLab = new javax.swing.JLabel();
         sLName = new javax.swing.JTextField();
         sGenLab = new javax.swing.JLabel();
-        sGender = new javax.swing.JComboBox<>();
+        sPerm = new javax.swing.JComboBox<>();
         sDobLab = new javax.swing.JLabel();
         sDob = new javax.swing.JFormattedTextField();
         sStreetLab = new javax.swing.JLabel();
@@ -83,10 +83,19 @@ public class Homepage extends javax.swing.JFrame {
         sHireLab = new javax.swing.JLabel();
         sHireDate = new javax.swing.JTextField();
         addStaffButton = new javax.swing.JButton();
-        sDeptNum = new javax.swing.JComboBox<>();
-        sHospNum1 = new javax.swing.JComboBox<>();
-        sSuperSsn = new javax.swing.JComboBox<>();
+        sDocList = new javax.swing.JComboBox<>();
         sTLSsn = new javax.swing.JComboBox<>();
+        sDocListLab = new javax.swing.JLabel();
+        sDocLic = new javax.swing.JTextField();
+        sNurseDegreeLab = new javax.swing.JLabel();
+        sNurseDegree = new javax.swing.JTextField();
+        sPermLab = new javax.swing.JLabel();
+        sDeptNum = new javax.swing.JComboBox<>();
+        sHospNum = new javax.swing.JComboBox<>();
+        sDocLab = new javax.swing.JLabel();
+        sGender = new javax.swing.JComboBox<>();
+        sSuperSsn = new javax.swing.JComboBox<>();
+        sClearButton = new javax.swing.JButton();
         patientTab = new javax.swing.JPanel();
         patientMultTab = new javax.swing.JTabbedPane();
         allPatients = new javax.swing.JPanel();
@@ -137,7 +146,7 @@ public class Homepage extends javax.swing.JFrame {
         addPatientButton = new javax.swing.JButton();
         pHospNum = new javax.swing.JComboBox<>();
         pRoomNum = new javax.swing.JComboBox<>();
-        sTLSsn1 = new javax.swing.JComboBox<>();
+        pDoc = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Homepage");
@@ -243,8 +252,14 @@ public class Homepage extends javax.swing.JFrame {
         sGenLab.setText("Gender");
         updateStaffTab.add(sGenLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
-        sGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
-        updateStaffTab.add(sGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 90, -1));
+        sPerm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y", "N" }));
+        sPerm.setVisible(false);
+        sPerm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sPermActionPerformed(evt);
+            }
+        });
+        updateStaffTab.add(sPerm, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 60, -1));
 
         sDobLab.setText("DOB");
         updateStaffTab.add(sDobLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, -1, -1));
@@ -291,7 +306,7 @@ public class Homepage extends javax.swing.JFrame {
         updateStaffTab.add(sSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 270, -1));
 
         sSuperSsnLab.setText("Supervisor SSN");
-        updateStaffTab.add(sSuperSsnLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+        updateStaffTab.add(sSuperSsnLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, -1));
 
         sPhoneLab.setText("Phone Number");
         updateStaffTab.add(sPhoneLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
@@ -302,7 +317,7 @@ public class Homepage extends javax.swing.JFrame {
         updateStaffTab.add(sEmergency, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 190, -1));
 
         sTeamLeadLab.setText("Team Leader SSN");
-        updateStaffTab.add(sTeamLeadLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, -1, -1));
+        updateStaffTab.add(sTeamLeadLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, -1, 20));
 
         sHosNumLab.setText("Dept. Number");
         updateStaffTab.add(sHosNumLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
@@ -311,29 +326,34 @@ public class Homepage extends javax.swing.JFrame {
         updateStaffTab.add(sDeptNumLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         sTitleLab.setText("Title");
-        updateStaffTab.add(sTitleLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
+        updateStaffTab.add(sTitleLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
-        sTitle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor", "Nurse", "Supervisor", "Team Leader" }));
+        sTitle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor", "Nurse", "Manager", "Director", "Supervisor", "Team Lead" }));
+        sTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sTitleActionPerformed(evt);
+            }
+        });
         sTitle.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 sTitleKeyTyped(evt);
             }
         });
-        updateStaffTab.add(sTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 120, -1));
+        updateStaffTab.add(sTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 120, -1));
 
         sSalaryLab.setText("Salary");
-        updateStaffTab.add(sSalaryLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, -1, -1));
-        updateStaffTab.add(sSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 130, -1));
+        updateStaffTab.add(sSalaryLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
+        updateStaffTab.add(sSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 110, -1));
 
         sHireLab.setText("Hire Date");
-        updateStaffTab.add(sHireLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, -1, -1));
+        updateStaffTab.add(sHireLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
 
         sHireDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sHireDateActionPerformed(evt);
             }
         });
-        updateStaffTab.add(sHireDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 110, -1));
+        updateStaffTab.add(sHireDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 110, -1));
 
         addStaffButton.setBackground(new java.awt.Color(82, 113, 255));
         addStaffButton.setText("Add New Staff");
@@ -342,32 +362,80 @@ public class Homepage extends javax.swing.JFrame {
                 addStaffButtonActionPerformed(evt);
             }
         });
-        updateStaffTab.add(addStaffButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 140, 40));
-        updateStaffTab.add(sDeptNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
+        updateStaffTab.add(addStaffButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 140, 40));
 
-        sHospNum1.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT hNo from Hospital")));
-        sHospNum1.addActionListener(new java.awt.event.ActionListener() {
+        sDocList.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN from Doctor")));
+        sDocList.setVisible(false);
+        sDocList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sHospNum1ActionPerformed(evt);
+                sDocListActionPerformed(evt);
             }
         });
-        updateStaffTab.add(sHospNum1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+        updateStaffTab.add(sDocList, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, -1, -1));
 
-        sSuperSsn.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT v.SSN FROM TeamLead v, Person p WHERE v.SSN=p.SSN")));
-        sSuperSsn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sSuperSsnActionPerformed(evt);
-            }
-        });
-        updateStaffTab.add(sSuperSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 130, -1));
-
-        sTLSsn.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT v.SSN FROM Supervisor v, Person p WHERE v.SSN=p.SSN")));
+        sTLSsn.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT v.SSN FROM TeamLead v, Person p WHERE v.SSN=p.SSN")));
         sTLSsn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sTLSsnActionPerformed(evt);
             }
         });
-        updateStaffTab.add(sTLSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 130, -1));
+        updateStaffTab.add(sTLSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 110, -1));
+
+        sDocListLab.setText("Nurse Works with");
+        sDocListLab.setVisible(false);
+        updateStaffTab.add(sDocListLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
+
+        sDocLic.setVisible(false);
+        updateStaffTab.add(sDocLic, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 70, -1));
+
+        sNurseDegreeLab.setText("Nurse Degree");
+        sNurseDegreeLab.setVisible(false);
+        updateStaffTab.add(sNurseDegreeLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
+
+        sNurseDegree.setVisible(false);
+        sNurseDegree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sNurseDegreeActionPerformed(evt);
+            }
+        });
+        updateStaffTab.add(sNurseDegree, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 70, -1));
+
+        sPermLab.setText("Permendent?");
+        sPermLab.setVisible(false);
+        updateStaffTab.add(sPermLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, -1, -1));
+        updateStaffTab.add(sDeptNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
+
+        sHospNum.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT hNo from Hospital")));
+        sHospNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sHospNumActionPerformed(evt);
+            }
+        });
+        updateStaffTab.add(sHospNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+
+        sDocLab.setText("Doctor License");
+        sDocLab.setVisible(false);
+        updateStaffTab.add(sDocLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, -1, -1));
+
+        sGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
+        updateStaffTab.add(sGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 90, -1));
+
+        sSuperSsn.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT v.SSN FROM Supervisor v, Person p WHERE v.SSN=p.SSN")));
+        sSuperSsn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sSuperSsnActionPerformed(evt);
+            }
+        });
+        updateStaffTab.add(sSuperSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 110, -1));
+
+        sClearButton.setBackground(new java.awt.Color(82, 113, 255));
+        sClearButton.setText("Clear Fields");
+        sClearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sClearButtonActionPerformed(evt);
+            }
+        });
+        updateStaffTab.add(sClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 140, 40));
 
         staffMultTab.addTab("Add New Staff", updateStaffTab);
 
@@ -402,13 +470,13 @@ public class Homepage extends javax.swing.JFrame {
 
         patientInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         infoPatientTableBox.setViewportView(patientInfoTable);
@@ -423,8 +491,8 @@ public class Homepage extends javax.swing.JFrame {
         });
         allPatients.add(patientInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 110, 30));
 
-        patientUpdateButton.setText("Update Staff");
-        allPatients.add(patientUpdateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 100, 30));
+        patientUpdateButton.setText("Update Patient");
+        allPatients.add(patientUpdateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 140, 30));
 
         patientMultTab.addTab("All Patients", allPatients);
 
@@ -458,7 +526,7 @@ public class Homepage extends javax.swing.JFrame {
         pGenLab.setText("Gender");
         updatePatientTab.add(pGenLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
-        pGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Female", "Male" }));
+        pGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
         updatePatientTab.add(pGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 90, -1));
 
         pDobLab.setText("DOB");
@@ -570,13 +638,13 @@ public class Homepage extends javax.swing.JFrame {
 
         updatePatientTab.add(pRoomNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, -1, -1));
 
-        sTLSsn1.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT v.SSN FROM Doctor v, Person p WHERE v.SSN=p.SSN")));
-        sTLSsn1.addActionListener(new java.awt.event.ActionListener() {
+        pDoc.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT v.SSN FROM Doctor v, Person p WHERE v.SSN=p.SSN")));
+        pDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sTLSsn1ActionPerformed(evt);
+                pDocActionPerformed(evt);
             }
         });
-        updatePatientTab.add(sTLSsn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 130, -1));
+        updatePatientTab.add(pDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 130, -1));
 
         patientMultTab.addTab("Add New Patient", updatePatientTab);
 
@@ -629,36 +697,125 @@ public class Homepage extends javax.swing.JFrame {
 
     private void addPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientButtonActionPerformed
         // TODO add your handling code here:
-        /*try{
+        try{
             
+            String person = "";
+            //SPLIT THIS UP INTO PROPER STATEMENTS!!
+            
+            // To Get information of New Staff
+            
+            boolean error = false;
+            String[] per = new String[11];
+            per[0] = pSsn.getText();
+            per[1] = pFName.getText();
+            per[2] = (pMInit.getText().isBlank() ? "null" : pMInit.getText());
+            per[3] = pLName.getText();
+            per[4] = pGender.getSelectedItem().toString();
+            per[5] = pDob.getText();
+            per[6] = pStreet.getText();
+            per[7] = (pStreet2.getText().isBlank() ? "null" : pStreet2.getText());
+            per[8] = pCity.getText();
+            per[9] = pState.getText();
+            per[10] = pZip.getText();
+            
+            for (int i = 0; i < per.length; i++){
+                if (per[i].isBlank()){
+                    error = true;
+                    break;
+                }
+                else{
+                    if (per[i].equals("null"))
+                        person += per[i];
+                    else
+                        person += "'"+per[i]+"'";
+                    if (i < per.length - 1) person+=",";
+                }
+            }
+            
+            String phone = "";
+            if (pPhone.getText().isBlank())
+                error = true;
+            else
+                phone = "'"+pSsn.getText()+"', '"+pPhone.getText()+"'";
+            
+            String emerg = "";
+            if (pEmergency.getText().isBlank())
+                error = true;
+            else
+                emerg = "'"+pSsn.getText()+"', '"+pEmergency.getText()+"'";
             
             // To Get information of New Patient
-            pFName.getText();
-            pMInit.getText();
-            pLName.getText();
-            pGender.getSelectedItem().toString();
-            pDob.getText();
-            pStreet.getText();
-            pStreet2.getText();
-            pCity.getText();
-            pState.getText();
-            pZip.getText();
-            pInsurance.getText();
-            pSsn.getText();
-            pPhone.getText();
-            pEmergency.getText();
-            pDocSsn.getText();
-            pHosNum.getText();
-            pRoomNo.getText();
-            pType.getSelectedItem().toString();
-            pCheckIn.getText();
-            pCheckOut.getText();
+
+            String patient = "";
+            String[] pat = new String[5];
+            
+            pat[0] = pSsn.getText();
+            pat[1] = pInsurance.getText();
+            pat[2] = pCheckIn.getText();
+            pat[3] = pCheckOut.getText();
+            pat[4] = pType.getSelectedItem().toString();
+            
+            for (int i = 0; i < pat.length; i++){
+                if (pat[i].isBlank()){
+                    error = true;
+                    break;
+                }
+                else{
+                    if (pat[i].equals("null"))
+                        patient += pat[i];
+                    else
+                        patient += "'"+pat[i]+"'";
+                    if (i < pat.length - 1) patient+=",";
+                }
+            }
+            
+            String care = "";
+            String[] ca = new String[4];
+            ca[0] = pSsn.getText();
+            ca[1] = pDoc.getSelectedItem().toString();
+            ca[2] = pRoomNum.getSelectedItem().toString();
+            ca[3] = pHospNum.getSelectedItem().toString();
+            
+            for (int i = 0; i < ca.length; i++){
+                if (ca[i].isBlank()){
+                    error = true;
+                    break;
+                }
+                else{
+                    if (ca[i].equals("null"))
+                        care += ca[i];
+                    else
+                        care += "'"+ca[i]+"'";
+                    if (i < ca.length - 1) care+=",";
+                }
+            }
             
             
-            JOptionPane.showMessageDialog(this, "New Patient Added!");
-        }catch (SQLException e){
-            System.err.println(e);
-        }*/
+            
+            
+            
+            if (error)
+                JOptionPane.showMessageDialog(null, "Not all needed fields filled.", "Error", JOptionPane.ERROR_MESSAGE);
+            else{
+                System.out.println(person);
+                System.out.println(phone);
+                System.out.println(emerg);
+                System.out.println(patient);
+                System.out.println(care);
+                
+                s.insert("INSERT INTO Person VALUES ("+person+")");
+                s.insert("INSERT INTO Person_PhoneNo VALUES ("+phone+")");
+                s.insert("INSERT INTO Person_EmergencyContact VALUES ("+emerg+")");
+                s.insert("INSERT INTO Patient VALUES ("+patient+")");
+                s.insert("INSERT INTO Care VALUES ("+care+")");
+
+                JOptionPane.showMessageDialog(null, "New Patient Added!", "", JOptionPane.PLAIN_MESSAGE);
+                updateTables();
+            }
+        }catch (NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Not all needed fields filled.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
     }//GEN-LAST:event_addPatientButtonActionPerformed
 
     private void pStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pStateActionPerformed
@@ -757,8 +914,8 @@ public class Homepage extends javax.swing.JFrame {
             st[2] = sSalary.getText();
             st[3] = sHireDate.getText();
             st[4] = (sTLSsn.getSelectedItem() == null ? "null" : sTLSsn.getSelectedItem().toString());
-            st[5] = (sSuperSsn.getSelectedItem() == null ? "null" : sSuperSsn.getSelectedItem().toString());;
-            st[6] = sHospNum1.getSelectedItem().toString();
+            st[5] = (sSuperSsn.getSelectedItem() == null ? "null" : sSuperSsn.getSelectedItem().toString());
+            st[6] = sHospNum.getSelectedItem().toString();
             st[7] = sDeptNum.getSelectedItem().toString();
             
             for (int i = 0; i < st.length; i++){
@@ -775,6 +932,34 @@ public class Homepage extends javax.swing.JFrame {
                 }
             }
             
+            String title = sTitle.getSelectedItem().toString();
+            String nurse = "";
+            String nurseDoc = "";
+            String doctorLic = "";
+            String doctor = "";
+            
+            if (title.equals("Nurse")){
+                if (sNurseDegree.getText().isBlank() || sDocList.getSelectedItem() == null)
+                    error = true;
+                else{
+                    nurse = "'"+sSsn.getText()+"', '"+sNurseDegree.getText()+"'";
+                    nurseDoc = "'"+sDocList.getSelectedItem().toString()+"', '"+sSsn.getText()+"'";
+                }
+            }
+            else if (title.equals("Doctor")){
+                if (sDocLic.getText().isBlank())
+                    error = true;
+                else
+                    doctorLic = "'"+sSsn.getText()+"', '"+sDocLic.getText()+"'";
+                
+                if (sPerm.getSelectedItem() == null)
+                    error = true;
+                else
+                    doctor = "'"+sSsn.getText()+"', '"+sPerm.getSelectedItem().toString()+"'";
+            }
+            
+            
+            
             if (error)
                 JOptionPane.showMessageDialog(null, "Not all needed fields filled.", "Error", JOptionPane.ERROR_MESSAGE);
             else{
@@ -782,15 +967,45 @@ public class Homepage extends javax.swing.JFrame {
                 System.out.println(phone);
                 System.out.println(emerg);
                 System.out.println(staff);
+                System.out.println(nurse);
+                System.out.println(nurseDoc);
+                
+                s.insert("INSERT INTO Person VALUES ("+person+")");
+                s.insert("INSERT INTO Person_PhoneNo VALUES ("+phone+")");
+                s.insert("INSERT INTO Person_EmergencyContact VALUES ("+emerg+")");
+                s.insert("INSERT INTO Staff VALUES ("+staff+")");
+
+                
+                switch (title){
+                    case "Nurse":
+                        s.insert("INSERT INTO Nurse VALUES ("+nurse+")");
+                        s.insert("INSERT INTO Doctor_Nurse_Assist VALUES ("+nurseDoc+")");
+                        break;
+                    case "Doctor":
+                        s.insert("INSERT INTO Doctor VALUES ("+doctor+")");
+                        s.insert("INSERT INTO Doctor_License VALUES ("+doctorLic+")");
+                        break;
+                    case "Manager":
+                        s.insert("INSERT INTO Manager VALUES ('"+sSsn.getText()+"')");
+                        break;
+                    case "Director":
+                        s.insert("INSERT INTO Director VALUES ('"+sSsn.getText()+"')");
+                        break;
+                    case "Supervisor":
+                        s.insert("INSERT INTO Supervisor VALUES ('"+sSsn.getText()+"')");
+                        break;
+                    case "Team Lead":
+                        s.insert("INSERT INTO TeamLead VALUES ('"+sSsn.getText()+"')");
+                        break;
+                    default:
+                        break;
+                }
+                
                 JOptionPane.showMessageDialog(null, "New Staff Added!", "", JOptionPane.PLAIN_MESSAGE);
+                
+                updateTables();
             }
-            System.out.println("error");
-            //s.insert("INSERT INTO Person VALUES "+person);
-            //s.insert("INSERT INTO Person_PhoneNo VALUES "+phone);
-            //s.insert("INSERT INTO Person_EmergencyContact VALUES "+emerg);
-            //s.insert("INSERT INTO Staff VALUES "+staff);
-            
-            //pop.showMessageDialog(this, "New Staff Added!");
+
             }catch(NullPointerException e){
                 JOptionPane.showMessageDialog(null, "Not all needed fields filled.", "Error", JOptionPane.ERROR_MESSAGE);
                 //System.err.print(e);
@@ -798,6 +1013,14 @@ public class Homepage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_addStaffButtonActionPerformed
 
+    public void updateTables(){
+        staffTable.setModel(makeTable("SELECT DISTINCT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name, title as Title FROM Staff, Person WHERE SSN=eSSN"));
+        patientTable.setModel(makeTable("SELECT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name FROM Person, Patient WHERE SSN=pSSN"));
+
+    }
+    
+    
+    
     private void staffInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffInfoButtonActionPerformed
         // TODO add your handling code here:
         int selected = staffTable.getSelectedRow();
@@ -813,17 +1036,9 @@ public class Homepage extends javax.swing.JFrame {
         patientInfoTable.setModel(makeDataTable("SELECT * FROM Person, Patient WHERE SSN='"+SSN+"' AND pSSN=SSN"));
     }//GEN-LAST:event_patientInfoButtonActionPerformed
 
-    private void sHospNum1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sHospNum1ActionPerformed
+    private void sDocListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sDocListActionPerformed
         // TODO add your handling code here:
-        if (sHospNum1.getSelectedItem() != null)
-            sDeptNum.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT DISTINCT dNo from Department, Hospital WHERE hNum = "+sHospNum1.getSelectedItem().toString()+"")));
-        else
-            sDeptNum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{""}));
-    }//GEN-LAST:event_sHospNum1ActionPerformed
-
-    private void sSuperSsnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSuperSsnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sSuperSsnActionPerformed
+    }//GEN-LAST:event_sDocListActionPerformed
 
     private void sTLSsnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sTLSsnActionPerformed
         // TODO add your handling code here:
@@ -838,9 +1053,89 @@ public class Homepage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_pHospNumActionPerformed
 
-    private void sTLSsn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sTLSsn1ActionPerformed
+    private void pDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pDocActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sTLSsn1ActionPerformed
+    }//GEN-LAST:event_pDocActionPerformed
+
+    private void sNurseDegreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sNurseDegreeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sNurseDegreeActionPerformed
+
+    private void sHospNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sHospNumActionPerformed
+        // TODO add your handling code here:
+        if (sHospNum.getSelectedItem() != null)
+            sDeptNum.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT DISTINCT dNo from Department, Hospital WHERE hNum = "+sHospNum.getSelectedItem().toString()+"")));
+        else
+            sDeptNum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{""}));
+    }//GEN-LAST:event_sHospNumActionPerformed
+
+    private void sPermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sPermActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sPermActionPerformed
+
+    private void sTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sTitleActionPerformed
+        // TODO add your handling code here:
+        
+        String title = (sTitle.getSelectedItem() == null ? "" : sTitle.getSelectedItem().toString());
+        
+        sDocLic.setVisible(false);
+        sDocLab.setVisible(false);
+        sPermLab.setVisible(false);
+        sPerm.setVisible(false);
+        sDocList.setVisible(false);
+        sDocListLab.setVisible(false);
+        sNurseDegree.setVisible(false);
+        sNurseDegreeLab.setVisible(false);
+        
+        
+        if (title.equals("Nurse")){
+            sDocList.setVisible(true);
+            sDocListLab.setVisible(true);
+            sNurseDegree.setVisible(true);
+            sNurseDegreeLab.setVisible(true);
+            
+        }
+        else if (title.equals ("Doctor")){
+            sDocLic.setVisible(true);
+            sDocLab.setVisible(true);
+            sPermLab.setVisible(true);
+            sPerm.setVisible(true);
+        }
+    }//GEN-LAST:event_sTitleActionPerformed
+
+    private void sSuperSsnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sSuperSsnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sSuperSsnActionPerformed
+
+    private void sClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sClearButtonActionPerformed
+        // TODO add your handling code here:
+        sSsn.setText("");
+        sFName.setText("");
+        sMInit.setText("");
+        sLName.setText("");
+        sSsn.setText("");
+        sPhone.setText("");
+        sEmergency.setText("");
+        sDob.setText("");
+        sStreet.setText("");
+        sStreet2.setText("");
+        sCity.setText("");
+        sState.setText("");
+        sZip.setText("");
+        sSalary.setText("");
+        sHireDate.setText("");
+        sDocLic.setText("");
+        sNurseDegree.setText("");
+        
+        sDeptNum.setSelectedIndex(-1);
+        sHospNum.setSelectedIndex(-1);
+        sGender.setSelectedIndex(-1);
+        sPerm.setSelectedIndex(-1);
+        sTitle.setSelectedIndex(-1);
+        sTLSsn.setSelectedIndex(-1);
+        sSuperSsn.setSelectedIndex(-1);
+        sDocList.setSelectedIndex(-1);
+    }//GEN-LAST:event_sClearButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -915,6 +1210,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel pCityLab;
     private javax.swing.JFormattedTextField pDob;
     private javax.swing.JLabel pDobLab;
+    private javax.swing.JComboBox<String> pDoc;
     private javax.swing.JLabel pDocSsnLab;
     private javax.swing.JLabel pEmergLab;
     private javax.swing.JTextField pEmergency;
@@ -954,10 +1250,15 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton patientUpdateButton;
     private javax.swing.JTextField sCity;
     private javax.swing.JLabel sCityLab;
+    private javax.swing.JButton sClearButton;
     private javax.swing.JComboBox<String> sDeptNum;
     private javax.swing.JLabel sDeptNumLab;
     private javax.swing.JFormattedTextField sDob;
     private javax.swing.JLabel sDobLab;
+    private javax.swing.JLabel sDocLab;
+    private javax.swing.JTextField sDocLic;
+    private javax.swing.JComboBox<String> sDocList;
+    private javax.swing.JLabel sDocListLab;
     private javax.swing.JLabel sEmergLab;
     private javax.swing.JTextField sEmergency;
     private javax.swing.JTextField sFName;
@@ -967,11 +1268,15 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JTextField sHireDate;
     private javax.swing.JLabel sHireLab;
     private javax.swing.JLabel sHosNumLab;
-    private javax.swing.JComboBox<String> sHospNum1;
+    private javax.swing.JComboBox<String> sHospNum;
     private javax.swing.JTextField sLName;
     private javax.swing.JLabel sLNameLab;
     private javax.swing.JTextField sMInit;
     private javax.swing.JLabel sMInitLab;
+    private javax.swing.JTextField sNurseDegree;
+    private javax.swing.JLabel sNurseDegreeLab;
+    private javax.swing.JComboBox<String> sPerm;
+    private javax.swing.JLabel sPermLab;
     private javax.swing.JTextField sPhone;
     private javax.swing.JLabel sPhoneLab;
     private javax.swing.JTextField sSalary;
@@ -987,7 +1292,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> sSuperSsn;
     private javax.swing.JLabel sSuperSsnLab;
     private javax.swing.JComboBox<String> sTLSsn;
-    private javax.swing.JComboBox<String> sTLSsn1;
     private javax.swing.JLabel sTeamLeadLab;
     private javax.swing.JComboBox<String> sTitle;
     private javax.swing.JLabel sTitleLab;
