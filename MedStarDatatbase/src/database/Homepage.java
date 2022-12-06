@@ -389,8 +389,7 @@ public class Homepage extends javax.swing.JFrame {
         updateStaffTab.add(sDobLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, -1, -1));
 
         sDob.setColumns(10);
-        sDob.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("YYYY-MM-dd"))));
-        sDob.setText("YYYY-MM-dd");
+        sDob.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
         updateStaffTab.add(sDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 140, -1));
 
         sStreetLab.setText("Street");
@@ -749,8 +748,7 @@ public class Homepage extends javax.swing.JFrame {
         updatePatientTab.add(pDobLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, -1, -1));
 
         pDob.setColumns(10);
-        pDob.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("YYYY-MM-dd"))));
-        pDob.setText("YYYY-MM-dd");
+        pDob.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
         updatePatientTab.add(pDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 140, -1));
 
         pStreetLab.setText("Street");
@@ -1252,7 +1250,9 @@ public class Homepage extends javax.swing.JFrame {
         
         
         if (title.equals("Doctor"))
-            sExtraInfo.setModel(makeTable("SELECT patSSN as Patient, room as Room, hospital as Hospital FROM Doctor, Care WHERE SSN='000000000' AND SSN = dSSN"));
+            sExtraInfo.setModel(makeTable("SELECT patSSN as Patient, room as Room, hospital as Hospital, TIMESTAMPDIFF(YEAR, p.dob, CURDATE()) AS 'Patient Age' FROM Doctor d, Care c, Person p WHERE d.SSN='"+SSN+"' AND d.SSN = c.dSSN AND c.patSSN = p.SSN"));
+        else if (title.equals("Nurse"))
+            sExtraInfo.setModel(makeTable("SELECT docSSN as 'Doctors Assisting' FROM Doctor_Nurse_Assist WHERE nSSN = '999999999'"));
         else
             sExtraInfo.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
