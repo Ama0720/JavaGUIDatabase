@@ -1438,6 +1438,7 @@ public class Homepage extends javax.swing.JFrame {
             s.insert("INSERT INTO Bill_Charges VALUES("+charge+")");
         }
         pBills.setModel(makeTable("SELECT bill as 'Bill Number', description as 'Description', amount as Amount FROM Person, Bill_Charges WHERE SSN='"+SSN+"' AND SSN=pSSN;"));
+        updateTables();
     }//GEN-LAST:event_pChargeButtonActionPerformed
 
     private void hButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hButtonActionPerformed
