@@ -36,6 +36,11 @@ public class Homepage extends javax.swing.JFrame {
         hospitalTab = new javax.swing.JPanel();
         hospitalTableBox = new javax.swing.JScrollPane();
         hospitalTable = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        hDepartments = new javax.swing.JTable();
+        hButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        hTypes = new javax.swing.JTable();
         staffTab = new javax.swing.JPanel();
         staffMultTab = new javax.swing.JTabbedPane();
         allStaff = new javax.swing.JPanel();
@@ -45,6 +50,12 @@ public class Homepage extends javax.swing.JFrame {
         staffInfoTable = new javax.swing.JTable();
         staffInfoButton = new javax.swing.JButton();
         staffUpdateButton = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        sExtraInfo = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        sPhones = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        sContact = new javax.swing.JTable();
         updateStaffTab = new javax.swing.JPanel();
         sFNameLab = new javax.swing.JLabel();
         sFName = new javax.swing.JTextField();
@@ -115,6 +126,10 @@ public class Homepage extends javax.swing.JFrame {
         pAmount = new javax.swing.JTextField();
         pChargeButton = new javax.swing.JButton();
         pDescription = new javax.swing.JTextField();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        pPhoneTable = new javax.swing.JTable();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        pContactTable = new javax.swing.JTable();
         updatePatientTab = new javax.swing.JPanel();
         pFNameLab = new javax.swing.JLabel();
         pFName = new javax.swing.JTextField();
@@ -164,27 +179,75 @@ public class Homepage extends javax.swing.JFrame {
 
         hospitalTableBox.setBackground(new java.awt.Color(153, 255, 153));
 
-        hospitalTable.setModel(makeTable("SELECT DISTINCT hName as Hospital, dName as Department, CONCAT(p.fname,' ', p.mint,'. ', p.lname) as Manager, CONCAT(p2.fname,' ', p2.mint,'. ', p2.lname) as Director FROM Hospital h, Department d, Manager m, Director dir, Staff s, Staff s2, Person p, Person p2 WHERE h.hNo=d.hNum AND d.mSSN = m.SSN AND m.SSN = s.eSSN AND s.eSSN = p.SSN AND d.dirSSN = dir.SSN AND dir.SSN = s2.eSSN AND s2.eSSN = p2.SSN"));
+        hospitalTable.setModel(makeTable("SELECT hNo as Number, hName as Hospital FROM Hospital;"));
         hospitalTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         hospitalTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         hospitalTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         hospitalTableBox.setViewportView(hospitalTable);
 
+        hDepartments.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(hDepartments);
+
+        hButton.setText("More Info");
+        hButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hButtonActionPerformed(evt);
+            }
+        });
+
+        hTypes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane4.setViewportView(hTypes);
+
         javax.swing.GroupLayout hospitalTabLayout = new javax.swing.GroupLayout(hospitalTab);
         hospitalTab.setLayout(hospitalTabLayout);
         hospitalTabLayout.setHorizontalGroup(
             hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hospitalTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(hospitalTableBox, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hospitalTabLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hospitalTabLayout.createSequentialGroup()
+                        .addComponent(hButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hospitalTabLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane4)
+                            .addComponent(hospitalTableBox, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(56, 56, 56))))
         );
         hospitalTabLayout.setVerticalGroup(
             hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(hospitalTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(hospitalTableBox, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(511, Short.MAX_VALUE))
+                .addComponent(hospitalTableBox, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(hButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(559, Short.MAX_VALUE))
         );
 
         tabs.addTab("Hospital", hospitalTab);
@@ -202,7 +265,7 @@ public class Homepage extends javax.swing.JFrame {
         staffTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         dispStaffTableBox.setViewportView(staffTable);
 
-        allStaff.add(dispStaffTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 570, 280));
+        allStaff.add(dispStaffTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 570, 230));
 
         staffInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,7 +280,7 @@ public class Homepage extends javax.swing.JFrame {
         ));
         infoStaffTableBox.setViewportView(staffInfoTable);
 
-        allStaff.add(infoStaffTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 570, 300));
+        allStaff.add(infoStaffTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 570, 150));
 
         staffInfoButton.setText("More Info");
         staffInfoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -225,10 +288,61 @@ public class Homepage extends javax.swing.JFrame {
                 staffInfoButtonActionPerformed(evt);
             }
         });
-        allStaff.add(staffInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 110, 30));
+        allStaff.add(staffInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 110, 30));
 
         staffUpdateButton.setText("Update Staff");
-        allStaff.add(staffUpdateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 100, 30));
+        staffUpdateButton.setEnabled(false);
+        staffUpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffUpdateButtonActionPerformed(evt);
+            }
+        });
+        allStaff.add(staffUpdateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 100, 30));
+
+        sExtraInfo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(sExtraInfo);
+
+        allStaff.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 570, 100));
+
+        sPhones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane6.setViewportView(sPhones);
+
+        allStaff.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 180, 50));
+
+        sContact.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane7.setViewportView(sContact);
+
+        allStaff.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, 200, 50));
 
         staffMultTab.addTab("All Staff", allStaff);
 
@@ -470,13 +584,13 @@ public class Homepage extends javax.swing.JFrame {
 
         allPatients.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        patientTable.setModel(makeTable("SELECT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name FROM Person, Patient WHERE SSN=pSSN"));
+        patientTable.setModel(makeTable("SELECT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name, SUM(amount) as 'Total Charges' FROM Person p, Patient pat, Bill_Charges bc WHERE p.SSN=pat.pSSN AND p.SSN=bc.pSSN GROUP BY SSN"));
         patientTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         patientTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         patientTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         dispPatientTableBox.setViewportView(patientTable);
 
-        allPatients.add(dispPatientTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 570, 280));
+        allPatients.add(dispPatientTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 570, 230));
 
         patientInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -491,7 +605,7 @@ public class Homepage extends javax.swing.JFrame {
         ));
         infoPatientTableBox.setViewportView(patientInfoTable);
 
-        allPatients.add(infoPatientTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 570, 170));
+        allPatients.add(infoPatientTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 570, 150));
 
         patientInfoButton.setText("More Info");
         patientInfoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -499,10 +613,16 @@ public class Homepage extends javax.swing.JFrame {
                 patientInfoButtonActionPerformed(evt);
             }
         });
-        allPatients.add(patientInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 110, 30));
+        allPatients.add(patientInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 110, 30));
 
         patientUpdateButton.setText("Update Patient");
-        allPatients.add(patientUpdateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 140, 30));
+        patientUpdateButton.setEnabled(false);
+        patientUpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                patientUpdateButtonActionPerformed(evt);
+            }
+        });
+        allPatients.add(patientUpdateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 140, 30));
 
         pTreatments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -517,7 +637,7 @@ public class Homepage extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(pTreatments);
 
-        allPatients.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 240, 100));
+        allPatients.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 240, 100));
 
         pBills.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -532,8 +652,8 @@ public class Homepage extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(pBills);
 
-        allPatients.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 530, 300, 100));
-        allPatients.add(pTreat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 640, 120, -1));
+        allPatients.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 520, 300, 100));
+        allPatients.add(pTreat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 120, -1));
 
         pTreatButton.setText("Add Treatment");
         pTreatButton.addActionListener(new java.awt.event.ActionListener() {
@@ -541,15 +661,15 @@ public class Homepage extends javax.swing.JFrame {
                 pTreatButtonActionPerformed(evt);
             }
         });
-        allPatients.add(pTreatButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, -1, -1));
+        allPatients.add(pTreatButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 630, -1, -1));
 
         pBillNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pBillNumActionPerformed(evt);
             }
         });
-        allPatients.add(pBillNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 640, 50, -1));
-        allPatients.add(pAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 640, 70, -1));
+        allPatients.add(pBillNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 630, 50, -1));
+        allPatients.add(pAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 630, 70, -1));
 
         pChargeButton.setText("Add Charge");
         pChargeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -557,8 +677,38 @@ public class Homepage extends javax.swing.JFrame {
                 pChargeButtonActionPerformed(evt);
             }
         });
-        allPatients.add(pChargeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 640, 90, -1));
-        allPatients.add(pDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 640, 60, -1));
+        allPatients.add(pChargeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 630, 90, -1));
+        allPatients.add(pDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 630, 60, -1));
+
+        pPhoneTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane8.setViewportView(pPhoneTable);
+
+        allPatients.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 180, 50));
+
+        pContactTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane9.setViewportView(pContactTable);
+
+        allPatients.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, 200, 50));
 
         patientMultTab.addTab("All Patients", allPatients);
 
@@ -1090,18 +1240,57 @@ public class Homepage extends javax.swing.JFrame {
     private void staffInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffInfoButtonActionPerformed
         // TODO add your handling code here:
         int selected = staffTable.getSelectedRow();
+        if (selected > -1){
         String SSN = (String)staffTable.getValueAt(selected, 0);
-        staffInfoTable.setModel(makeDataTable("SELECT * FROM Person, Staff WHERE SSN='"+SSN+"' AND eSSN=SSN"));
+        String title = (String)staffTable.getValueAt(selected, 2);
+        staffInfoTable.setModel(makeDataTable("SELECT *, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS Age FROM Person, Staff WHERE SSN='"+SSN+"' AND eSSN=SSN"));
+        
+        sPhones.setModel(makeTable("SELECT phoneNo FROM Person, Person_PhoneNo WHERE SSN = '"+SSN+"' AND SSN=perSSN"));
+        sContact.setModel(makeTable("SELECT emergencyConact FROM Person, Person_EmergencyContact WHERE SSN = '"+SSN+"' AND SSN=perSSN"));
+        
+        staffUpdateButton.setEnabled(true);
+        
+        
+        if (title.equals("Doctor"))
+            sExtraInfo.setModel(makeTable("SELECT patSSN as Patient, room as Room, hospital as Hospital FROM Doctor, Care WHERE SSN='000000000' AND SSN = dSSN"));
+        else
+            sExtraInfo.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+                    {},
+                    {},
+                    {},
+                    {}
+                },
+                new String [] {
+
+                }
+            ));
+        }else{
+            JOptionPane.showMessageDialog(null, "No staff member selected.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_staffInfoButtonActionPerformed
 
     private void patientInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientInfoButtonActionPerformed
         // TODO add your handling code here:
         int selected = patientTable.getSelectedRow();
+        if (selected > -1){
         String SSN = (String)patientTable.getValueAt(selected, 0);
-        patientInfoTable.setModel(makeDataTable("SELECT * FROM Person, Patient WHERE SSN='"+SSN+"' AND pSSN=SSN"));
+        
+        pPhoneTable.setModel(makeTable("SELECT phoneNo FROM Person, Person_PhoneNo WHERE SSN = '"+SSN+"' AND SSN=perSSN"));
+        pContactTable.setModel(makeTable("SELECT emergencyConact FROM Person, Person_EmergencyContact WHERE SSN = '"+SSN+"' AND SSN=perSSN"));
+        
+        patientInfoTable.setModel(makeDataTable("SELECT * , TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS Age FROM Person, Patient WHERE SSN='"+SSN+"' AND pSSN=SSN"));
         pTreatments.setModel(makeTable("SELECT treatment as Treatment FROM Person, Care_Treatment WHERE SSN='"+SSN+"' AND SSN=pSSN"));
         pBills.setModel(makeTable("SELECT bill as 'Bill Number', description as 'Description', amount as Amount FROM Person, Bill_Charges WHERE SSN='"+SSN+"' AND SSN=pSSN;"));
+        
+        
+        patientUpdateButton.setEnabled(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No patient selected.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
     }//GEN-LAST:event_patientInfoButtonActionPerformed
 
     private void sDocListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sDocListActionPerformed
@@ -1252,6 +1441,136 @@ public class Homepage extends javax.swing.JFrame {
         pBills.setModel(makeTable("SELECT bill as 'Bill Number', description as 'Description', amount as Amount FROM Person, Bill_Charges WHERE SSN='"+SSN+"' AND SSN=pSSN;"));
     }//GEN-LAST:event_pChargeButtonActionPerformed
 
+    private void hButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hButtonActionPerformed
+        // TODO add your handling code here:
+        
+        int selected = hospitalTable.getSelectedRow();
+        String num = (String)hospitalTable.getValueAt(selected, 0);
+        hDepartments.setModel(makeTable("SELECT DISTINCT dName as Department, CONCAT(p.fname,' ', p.mint,'. ', p.lname) as Manager, CONCAT(p2.fname,' ', p2.mint,'. ', p2.lname) as Director FROM Hospital h, Department d, Manager m, Director dir, Staff s, Staff s2, Person p, Person p2 WHERE h.hNo='"+num+"' AND h.hNo=d.hNum AND d.mSSN = m.SSN AND m.SSN = s.eSSN AND s.eSSN = p.SSN AND d.dirSSN = dir.SSN AND dir.SSN = s2.eSSN AND s2.eSSN = p2.SSN;"));
+        
+        hTypes.setModel(makeTable("SELECT ptype as 'Patient Type', COUNT(*) as 'Number of Patients' FROM Hospital h, Staff s, Doctor doc, Care c, Patient p WHERE h.hNo='"+num+"' AND h.hNo=s.hNo AND s.eSSN=doc.SSN AND doc.SSN=c.dSSN AND c.patSSN=p.pSSN GROUP BY pType;"));
+        
+        
+    }//GEN-LAST:event_hButtonActionPerformed
+
+    private void staffUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffUpdateButtonActionPerformed
+        // TODO add your handling code here:
+        if (staffTable.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "No staff member selected.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            int num = staffInfoTable.getRowCount();
+            boolean error = false;
+
+            String[] up = new String[num];
+
+            for (int i = 0; i< num; i++){
+                up[i] = (staffInfoTable.getValueAt(i, 1) == null ? "null" : staffInfoTable.getValueAt(i, 1).toString());
+            }
+
+            for (int i = 0; i < up.length; i++){
+                if (up[i].isBlank()){
+                    error = true;
+                    break;
+                }
+                else{
+                    if (!up[i].equals("null"))
+                        up[i] = "'"+up[i]+"'";
+                }
+            }
+
+            String person = "fName = "+up[1]
+                    + ",mInt = "+up[2]
+                    + ",lName = "+up[3]
+                    + ",gender = "+up[4]
+                    + ",dob = "+up[5]
+                    + ",street = "+up[6]
+                    + ",street2 = "+up[7]
+                    + ",city = "+up[8]
+                    + ",state = "+up[9]
+                    + ",zipcode = "+up[10];
+            
+            String staff = "title ="+up[12]
+                    + ",salary = "+up[13]
+                    + ",hireDate = "+up[14]
+                    + ",tlSSN = "+up[15]
+                    + ",superSSN = "+up[16]
+                    + ",hNo = "+up[17]
+                    + ",dNo = "+up[18];
+            
+            
+            if (error){
+                JOptionPane.showMessageDialog(null, "Error occured.", "", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                s.insert("UPDATE Person SET "+person+"WHERE SSN="+up[0]);
+                s.insert("UPDATE Staff SET "+staff +"WHERE eSSN="+up[0]);
+                
+                staffInfoTable.setModel(makeDataTable("SELECT *, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS Age FROM Person, Staff WHERE SSN="+up[0]+" AND eSSN=SSN"));
+
+                
+                JOptionPane.showMessageDialog(null, "Staff info updated!", "", JOptionPane.PLAIN_MESSAGE);
+
+            }
+        }
+    }//GEN-LAST:event_staffUpdateButtonActionPerformed
+
+    private void patientUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientUpdateButtonActionPerformed
+        // TODO add your handling code here:
+        if (patientTable.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "No patient selected.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            int num = patientInfoTable.getRowCount();
+            boolean error = false;
+
+            String[] up = new String[num];
+
+            for (int i = 0; i< num; i++){
+                up[i] = (patientInfoTable.getValueAt(i, 1) == null ? "null" : patientInfoTable.getValueAt(i, 1).toString());
+            }
+
+            for (int i = 0; i < up.length; i++){
+                if (up[i].isBlank()){
+                    error = true;
+                    break;
+                }
+                else{
+                    if (!up[i].equals("null"))
+                        up[i] = "'"+up[i]+"'";
+                }
+            }
+
+            String person = "fName = "+up[1]
+                    + ",mInt = "+up[2]
+                    + ",lName = "+up[3]
+                    + ",gender = "+up[4]
+                    + ",dob = "+up[5]
+                    + ",street = "+up[6]
+                    + ",street2 = "+up[7]
+                    + ",city = "+up[8]
+                    + ",state = "+up[9]
+                    + ",zipcode = "+up[10];
+            
+            String patient = "healthInsurance ="+up[12]
+                    + ",checkInTime = "+up[13]
+                    + ",checkOutTime = "+up[14]
+                    + ",pType = "+up[15];
+            
+            
+            if (error){
+                JOptionPane.showMessageDialog(null, "Error occured.", "", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                s.insert("UPDATE Person SET "+person+"WHERE SSN="+up[0]);
+                s.insert("UPDATE Patient SET "+patient +"WHERE pSSN="+up[0]);
+                patientInfoTable.setModel(makeDataTable("SELECT * , TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS Age FROM Person, Patient WHERE SSN="+up[0]+" AND pSSN=SSN"));
+                JOptionPane.showMessageDialog(null, "Patient info updated!", "", JOptionPane.PLAIN_MESSAGE);
+
+            }
+        }
+    }//GEN-LAST:event_patientUpdateButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1317,6 +1636,9 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JPanel allStaff;
     private javax.swing.JScrollPane dispPatientTableBox;
     private javax.swing.JScrollPane dispStaffTableBox;
+    private javax.swing.JButton hButton;
+    private javax.swing.JTable hDepartments;
+    private javax.swing.JTable hTypes;
     private javax.swing.JPanel hospitalTab;
     private javax.swing.JTable hospitalTable;
     private javax.swing.JScrollPane hospitalTableBox;
@@ -1324,6 +1646,13 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JScrollPane infoStaffTableBox;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextField pAmount;
     private javax.swing.JTextField pBillNum;
     private javax.swing.JTable pBills;
@@ -1334,6 +1663,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel pCheckOutLab;
     private javax.swing.JTextField pCity;
     private javax.swing.JLabel pCityLab;
+    private javax.swing.JTable pContactTable;
     private javax.swing.JTextField pDescription;
     private javax.swing.JFormattedTextField pDob;
     private javax.swing.JLabel pDobLab;
@@ -1355,6 +1685,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel pMInitLab;
     private javax.swing.JTextField pPhone;
     private javax.swing.JLabel pPhoneLab;
+    private javax.swing.JTable pPhoneTable;
     private javax.swing.JLabel pRoomNoLab;
     private javax.swing.JComboBox<String> pRoomNum;
     private javax.swing.JTextField pSsn;
@@ -1381,6 +1712,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JTextField sCity;
     private javax.swing.JLabel sCityLab;
     private javax.swing.JButton sClearButton;
+    private javax.swing.JTable sContact;
     private javax.swing.JComboBox<String> sDeptNum;
     private javax.swing.JLabel sDeptNumLab;
     private javax.swing.JFormattedTextField sDob;
@@ -1391,6 +1723,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel sDocListLab;
     private javax.swing.JLabel sEmergLab;
     private javax.swing.JTextField sEmergency;
+    private javax.swing.JTable sExtraInfo;
     private javax.swing.JTextField sFName;
     private javax.swing.JLabel sFNameLab;
     private javax.swing.JLabel sGenLab;
@@ -1409,6 +1742,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel sPermLab;
     private javax.swing.JTextField sPhone;
     private javax.swing.JLabel sPhoneLab;
+    private javax.swing.JTable sPhones;
     private javax.swing.JTextField sSalary;
     private javax.swing.JLabel sSalaryLab;
     private javax.swing.JTextField sSsn;
