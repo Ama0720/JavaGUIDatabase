@@ -252,6 +252,7 @@ public class Homepage extends javax.swing.JFrame {
 
         tabs.addTab("Hospital", hospitalTab);
 
+        allStaff.setAutoscrolls(true);
         allStaff.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dispStaffTableBox.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -347,6 +348,7 @@ public class Homepage extends javax.swing.JFrame {
         staffMultTab.addTab("All Staff", allStaff);
 
         updateStaffTab.setBackground(new java.awt.Color(219, 196, 113));
+        updateStaffTab.setAutoscrolls(true);
         updateStaffTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sFNameLab.setText("First Name");
@@ -390,6 +392,7 @@ public class Homepage extends javax.swing.JFrame {
 
         sDob.setColumns(10);
         sDob.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        sDob.setText("YYYY-MM-dd");
         updateStaffTab.add(sDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 140, -1));
 
         sStreetLab.setText("Street");
@@ -426,6 +429,8 @@ public class Homepage extends javax.swing.JFrame {
 
         sSsnLab.setText("SSN");
         updateStaffTab.add(sSsnLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
+
+        sSsn.setText("#########");
         updateStaffTab.add(sSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 270, -1));
 
         sSuperSsnLab.setText("Supervisor SSN");
@@ -433,10 +438,14 @@ public class Homepage extends javax.swing.JFrame {
 
         sPhoneLab.setText("Phone Number");
         updateStaffTab.add(sPhoneLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
+
+        sPhone.setText("+1 ### ### ####");
         updateStaffTab.add(sPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 210, -1));
 
         sEmergLab.setText("Emergency Contact");
         updateStaffTab.add(sEmergLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+
+        sEmergency.setText("+1 ### ### ####");
         updateStaffTab.add(sEmergency, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 190, -1));
 
         sTeamLeadLab.setText("Team Leader SSN");
@@ -471,6 +480,7 @@ public class Homepage extends javax.swing.JFrame {
         sHireLab.setText("Hire Date");
         updateStaffTab.add(sHireLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
 
+        sHireDate.setText("YYYY-MM-dd");
         sHireDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sHireDateActionPerformed(evt);
@@ -523,7 +533,7 @@ public class Homepage extends javax.swing.JFrame {
         });
         updateStaffTab.add(sNurseDegree, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 70, -1));
 
-        sPermLab.setText("Permendent?");
+        sPermLab.setText("Permanent");
         sPermLab.setVisible(false);
         updateStaffTab.add(sPermLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, -1, -1));
         updateStaffTab.add(sDeptNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
