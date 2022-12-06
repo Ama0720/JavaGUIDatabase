@@ -255,12 +255,11 @@ public class Homepage extends javax.swing.JFrame {
         loginPanelLayout.setHorizontalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginPanelLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addGap(225, 225, 225)
+                        .addGap(119, 119, 119)
                         .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(loginPanelLayout.createSequentialGroup()
                                 .addGap(3, 3, 3)
@@ -275,12 +274,12 @@ public class Homepage extends javax.swing.JFrame {
                                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(userField)
                                     .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(loginPanelLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
                 .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -294,7 +293,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(192, 192, 192))
+                .addContainerGap(627, Short.MAX_VALUE))
         );
 
         mainPanel.add(loginPanel, "login");
@@ -715,7 +714,7 @@ public class Homepage extends javax.swing.JFrame {
 
         allPatients.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        patientTable.setModel(makeTable("SELECT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name, SUM(amount) as 'Total Charges' FROM Person p, Patient pat, Bill_Charges bc WHERE p.SSN=pat.pSSN AND p.SSN=bc.pSSN GROUP BY SSN"));
+        patientTable.setModel(makeTable("SELECT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name FROM Person p, Patient pat  WHERE p.SSN=pat.pSSN"));
         patientTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         patientTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         patientTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -881,6 +880,7 @@ public class Homepage extends javax.swing.JFrame {
 
         pDob.setColumns(10);
         pDob.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        pDob.setText("YYYY-MM-dd");
         updatePatientTab.add(pDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 140, -1));
 
         pStreetLab.setText("Street");
@@ -921,14 +921,20 @@ public class Homepage extends javax.swing.JFrame {
 
         pSsnLab.setText("SSN");
         updatePatientTab.add(pSsnLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
+
+        pSsn.setText("#########");
         updatePatientTab.add(pSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 270, -1));
 
         pPhoneLab.setText("Phone Number");
         updatePatientTab.add(pPhoneLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
+
+        pPhone.setText("+1 ### ### ####");
         updatePatientTab.add(pPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 210, -1));
 
         pEmergLab.setText("Emergency Contact");
         updatePatientTab.add(pEmergLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+
+        pEmergency.setText("+1 ### ### ####");
         updatePatientTab.add(pEmergency, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 190, -1));
 
         pDocSsnLab.setText("Doctor's SSN");
@@ -953,11 +959,14 @@ public class Homepage extends javax.swing.JFrame {
 
         pCheckInLab.setText("Check-In");
         updatePatientTab.add(pCheckInLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+
+        pCheckIn.setText("YYYY-MM-dd hh:mm:ss");
         updatePatientTab.add(pCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 120, -1));
 
         pCheckOutLab.setText("Check-Out");
         updatePatientTab.add(pCheckOutLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, -1, -1));
 
+        pCheckOut.setText("YYYY-MM-dd hh:mm:ss");
         pCheckOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pCheckOutActionPerformed(evt);
