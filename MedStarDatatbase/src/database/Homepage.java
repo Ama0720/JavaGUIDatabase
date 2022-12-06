@@ -105,6 +105,16 @@ public class Homepage extends javax.swing.JFrame {
         patientInfoTable = new javax.swing.JTable();
         patientInfoButton = new javax.swing.JButton();
         patientUpdateButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        pTreatments = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        pBills = new javax.swing.JTable();
+        pTreat = new javax.swing.JTextField();
+        pTreatButton = new javax.swing.JButton();
+        pBillNum = new javax.swing.JTextField();
+        pAmount = new javax.swing.JTextField();
+        pChargeButton = new javax.swing.JButton();
+        pDescription = new javax.swing.JTextField();
         updatePatientTab = new javax.swing.JPanel();
         pFNameLab = new javax.swing.JLabel();
         pFName = new javax.swing.JTextField();
@@ -481,7 +491,7 @@ public class Homepage extends javax.swing.JFrame {
         ));
         infoPatientTableBox.setViewportView(patientInfoTable);
 
-        allPatients.add(infoPatientTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 570, 300));
+        allPatients.add(infoPatientTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 570, 170));
 
         patientInfoButton.setText("More Info");
         patientInfoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -493,6 +503,62 @@ public class Homepage extends javax.swing.JFrame {
 
         patientUpdateButton.setText("Update Patient");
         allPatients.add(patientUpdateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 140, 30));
+
+        pTreatments.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(pTreatments);
+
+        allPatients.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 240, 100));
+
+        pBills.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(pBills);
+
+        allPatients.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 530, 300, 100));
+        allPatients.add(pTreat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 640, 120, -1));
+
+        pTreatButton.setText("Add Treatment");
+        pTreatButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pTreatButtonActionPerformed(evt);
+            }
+        });
+        allPatients.add(pTreatButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 640, -1, -1));
+
+        pBillNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pBillNumActionPerformed(evt);
+            }
+        });
+        allPatients.add(pBillNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 640, 50, -1));
+        allPatients.add(pAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 640, 70, -1));
+
+        pChargeButton.setText("Add Charge");
+        pChargeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pChargeButtonActionPerformed(evt);
+            }
+        });
+        allPatients.add(pChargeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 640, 90, -1));
+        allPatients.add(pDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 640, 60, -1));
 
         patientMultTab.addTab("All Patients", allPatients);
 
@@ -1034,6 +1100,8 @@ public class Homepage extends javax.swing.JFrame {
         int selected = patientTable.getSelectedRow();
         String SSN = (String)patientTable.getValueAt(selected, 0);
         patientInfoTable.setModel(makeDataTable("SELECT * FROM Person, Patient WHERE SSN='"+SSN+"' AND pSSN=SSN"));
+        pTreatments.setModel(makeTable("SELECT treatment as Treatment FROM Person, Care_Treatment WHERE SSN='"+SSN+"' AND SSN=pSSN"));
+        pBills.setModel(makeTable("SELECT bill as 'Bill Number', description as 'Description', amount as Amount FROM Person, Bill_Charges WHERE SSN='"+SSN+"' AND SSN=pSSN;"));
     }//GEN-LAST:event_patientInfoButtonActionPerformed
 
     private void sDocListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sDocListActionPerformed
@@ -1137,6 +1205,53 @@ public class Homepage extends javax.swing.JFrame {
         sDocList.setSelectedIndex(-1);
     }//GEN-LAST:event_sClearButtonActionPerformed
 
+    private void pTreatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pTreatButtonActionPerformed
+        // TODO add your handling code here:
+        String treat = pTreat.getText();
+        String SSN = patientInfoTable.getValueAt(0,1).toString();
+        
+        String[] ca = makeList2("SELECT * FROM Care WHERE patSSN = '"+SSN+"'");
+        String care = "'"+ca[0]+"','"+ca[1]+"','"+ca[2]+"','"+ca[3]+"','"+treat+"'";
+        
+        System.out.println(care);
+        s.insert("INSERT INTO Care_Treatment VALUES("+care+")");
+        pTreatments.setModel(makeTable("SELECT treatment as Treatment FROM Person, Care_Treatment WHERE SSN='"+SSN+"' AND SSN=pSSN"));
+    }//GEN-LAST:event_pTreatButtonActionPerformed
+
+    private void pBillNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pBillNumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pBillNumActionPerformed
+
+    private void pChargeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pChargeButtonActionPerformed
+        // TODO add your handling code here:
+        boolean exists = false;
+        String bNo = pBillNum.getText();
+        String description = pDescription.getText();
+        String amount = pAmount.getText();
+        
+        String SSN = patientInfoTable.getValueAt(0,1).toString();
+        
+        String bill = "'"+bNo+"','"+SSN+"'";
+        String charge = bill+",'"+description+"','"+amount+"'";
+        
+        System.out.println(charge);
+        
+        String[] bills = makeList("SELECT bNo FROM Bill WHERE patSSN ='"+SSN+"'");
+        
+        for (String i:bills){
+            if (bNo.equals(i))
+                exists = true;
+        }
+        
+        if (exists)
+            s.insert("INSERT INTO Bill_Charges VALUES("+charge+")");
+        else{
+            s.insert("INSERT INTO Bill VALUES("+bill+")");
+            s.insert("INSERT INTO Bill_Charges VALUES("+charge+")");
+        }
+        pBills.setModel(makeTable("SELECT bill as 'Bill Number', description as 'Description', amount as Amount FROM Person, Bill_Charges WHERE SSN='"+SSN+"' AND SSN=pSSN;"));
+    }//GEN-LAST:event_pChargeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1189,6 +1304,11 @@ public class Homepage extends javax.swing.JFrame {
         String[] list = s.getList(s.get(query));
         return list;
     }
+    
+    public static String[] makeList2(String query){
+        String[] list = s.getList2(s.get(query));
+        return list;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPatientButton;
@@ -1202,12 +1322,19 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JScrollPane hospitalTableBox;
     private javax.swing.JScrollPane infoPatientTableBox;
     private javax.swing.JScrollPane infoStaffTableBox;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField pAmount;
+    private javax.swing.JTextField pBillNum;
+    private javax.swing.JTable pBills;
+    private javax.swing.JButton pChargeButton;
     private javax.swing.JTextField pCheckIn;
     private javax.swing.JLabel pCheckInLab;
     private javax.swing.JTextField pCheckOut;
     private javax.swing.JLabel pCheckOutLab;
     private javax.swing.JTextField pCity;
     private javax.swing.JLabel pCityLab;
+    private javax.swing.JTextField pDescription;
     private javax.swing.JFormattedTextField pDob;
     private javax.swing.JLabel pDobLab;
     private javax.swing.JComboBox<String> pDoc;
@@ -1238,6 +1365,9 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JTextField pStreet2;
     private javax.swing.JLabel pStreet2Lab;
     private javax.swing.JLabel pStreetLab;
+    private javax.swing.JTextField pTreat;
+    private javax.swing.JButton pTreatButton;
+    private javax.swing.JTable pTreatments;
     private javax.swing.JComboBox<String> pType;
     private javax.swing.JLabel pTypeLab;
     private javax.swing.JTextField pZip;

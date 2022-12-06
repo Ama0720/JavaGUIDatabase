@@ -138,5 +138,22 @@ public class DBSQL {
         }
         return list.toArray(new String[list.size()]);
     }
+    
+    public String[] getList2(ResultSet rs){
+        String[] list = new String[1]; 
+        try {
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int col = rsmd.getColumnCount();
+            list = new String[col];
+            int j = 0;
+            while(rs.next()){
+                for (int i = 0; i < col; i++, j++)
+                    list[j] = rs.getString(i+1);
+            }
+        }catch (SQLException e){
+            System.err.println(e);
+        }
+        return list;
+    }
 
 }
