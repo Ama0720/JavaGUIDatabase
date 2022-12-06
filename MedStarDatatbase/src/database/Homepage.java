@@ -1252,7 +1252,7 @@ public class Homepage extends javax.swing.JFrame {
         if (title.equals("Doctor"))
             sExtraInfo.setModel(makeTable("SELECT patSSN as Patient, room as Room, hospital as Hospital, TIMESTAMPDIFF(YEAR, p.dob, CURDATE()) AS 'Patient Age' FROM Doctor d, Care c, Person p WHERE d.SSN='"+SSN+"' AND d.SSN = c.dSSN AND c.patSSN = p.SSN"));
         else if (title.equals("Nurse"))
-            sExtraInfo.setModel(makeTable("SELECT docSSN as 'Doctors Assisting' FROM Doctor_Nurse_Assist WHERE nSSN = '999999999'"));
+            sExtraInfo.setModel(makeTable("SELECT docSSN as 'Doctors Assisting' FROM Doctor_Nurse_Assist WHERE nSSN = '"+SSN+"'"));
         else
             sExtraInfo.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
