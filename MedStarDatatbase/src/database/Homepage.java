@@ -1229,8 +1229,7 @@ public class Homepage extends javax.swing.JFrame {
 
     public void updateTables(){
         staffTable.setModel(makeTable("SELECT DISTINCT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name, title as Title FROM Staff, Person WHERE SSN=eSSN"));
-        patientTable.setModel(makeTable("SELECT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name FROM Person, Patient WHERE SSN=pSSN"));
-
+        patientTable.setModel(makeTable("SELECT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name, SUM(amount) as 'Total Charges' FROM Person p, Patient pat, Bill_Charges bc WHERE p.SSN=pat.pSSN AND p.SSN=bc.pSSN GROUP BY SSN")); 
     }
     
     
@@ -1507,7 +1506,7 @@ public class Homepage extends javax.swing.JFrame {
                 s.insert("UPDATE Staff SET "+staff +"WHERE eSSN="+up[0]);
                 
                 staffInfoTable.setModel(makeDataTable("SELECT *, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS Age FROM Person, Staff WHERE SSN="+up[0]+" AND eSSN=SSN"));
-
+                updateTables();
                 
                 JOptionPane.showMessageDialog(null, "Staff info updated!", "", JOptionPane.PLAIN_MESSAGE);
 
@@ -1565,6 +1564,7 @@ public class Homepage extends javax.swing.JFrame {
                 s.insert("UPDATE Person SET "+person+"WHERE SSN="+up[0]);
                 s.insert("UPDATE Patient SET "+patient +"WHERE pSSN="+up[0]);
                 patientInfoTable.setModel(makeDataTable("SELECT * , TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS Age FROM Person, Patient WHERE SSN="+up[0]+" AND pSSN=SSN"));
+                updateTables();
                 JOptionPane.showMessageDialog(null, "Patient info updated!", "", JOptionPane.PLAIN_MESSAGE);
 
             }
