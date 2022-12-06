@@ -4,10 +4,20 @@
  */
 package database;
 
+import java.awt.CardLayout;
+import java.awt.Image;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import javax.sql.*;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
+
 
 
 /**
@@ -15,14 +25,26 @@ import java.sql.SQLException;
  * @author aenyi
  */
 public class Homepage extends javax.swing.JFrame {
+    
+    String username;
+    String pass;
 
     /**
      * Creates new form Homepage
      */
     public Homepage() {
         initComponents();
+        resizeImage();
     }
-
+    
+    public void resizeImage() {
+        ImageIcon icon =  new ImageIcon("src/database/2560px-MedStar_Health_logo.svg.png");
+        Image img = icon.getImage();
+        Image imgScaled = img.getScaledInstance(loginLabel.getWidth(), loginLabel.getHeight(), Image.SCALE_DEFAULT);
+        ImageIcon scaled = new ImageIcon(imgScaled);
+        loginLabel.setIcon(scaled);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,6 +54,16 @@ public class Homepage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mainPanel = new javax.swing.JPanel();
+        loginPanel = new javax.swing.JPanel();
+        passField = new javax.swing.JPasswordField();
+        userField = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        loginLabel = new javax.swing.JLabel();
+        homePanel = new javax.swing.JPanel();
         tabs = new javax.swing.JTabbedPane();
         hospitalTab = new javax.swing.JPanel();
         hospitalTableBox = new javax.swing.JScrollPane();
@@ -176,6 +208,96 @@ public class Homepage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Homepage");
         setBackground(new java.awt.Color(99, 187, 191));
+
+        mainPanel.setMinimumSize(new java.awt.Dimension(672, 1073));
+        mainPanel.setOpaque(false);
+        mainPanel.setPreferredSize(new java.awt.Dimension(672, 1073));
+        mainPanel.setLayout(new java.awt.CardLayout());
+
+        loginPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        loginPanel.setInheritsPopupMenu(true);
+        loginPanel.setPreferredSize(new java.awt.Dimension(500, 500));
+
+        passField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passFieldActionPerformed(evt);
+            }
+        });
+
+        userField.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                userFieldPropertyChange(evt);
+            }
+        });
+
+        jLabel1.setLabelFor(userField);
+        jLabel1.setText("Username:");
+
+        jLabel2.setLabelFor(passField);
+        jLabel2.setText("Password:");
+
+        jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
+        loginPanel.setLayout(loginPanelLayout);
+        loginPanelLayout.setHorizontalGroup(
+            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginPanelLayout.createSequentialGroup()
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(loginPanelLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(loginPanelLayout.createSequentialGroup()
+                                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(userField)
+                                    .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        loginPanelLayout.setVerticalGroup(
+            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(192, 192, 192))
+        );
+
+        mainPanel.add(loginPanel, "login");
 
         hospitalTableBox.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -891,21 +1013,40 @@ public class Homepage extends javax.swing.JFrame {
 
         tabs.addTab("Patient", patientTab);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
+        homePanel.setLayout(homePanelLayout);
+        homePanelLayout.setHorizontalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabs)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        homePanelLayout.setVerticalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabs)
                 .addContainerGap())
+        );
+
+        mainPanel.add(homePanel, "home");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -1582,6 +1723,37 @@ public class Homepage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_patientUpdateButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        pass = new String(passField.getPassword());
+        if ("medadmin".equals(username) && "0000".equals(pass)) {
+            CardLayout cl = (CardLayout) mainPanel.getLayout();
+            cl.show(mainPanel, "home");
+        } else {
+            JOptionPane.showMessageDialog(mainPanel, "Incorrect login information", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
+    private void passFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passFieldActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void userFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_userFieldPropertyChange
+        try {
+            userField.commitEdit();
+            username = userField.getText();
+        } catch (ParseException ex) {
+            Logger.getLogger(Homepage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_userFieldPropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -1650,11 +1822,16 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton hButton;
     private javax.swing.JTable hDepartments;
     private javax.swing.JTable hTypes;
+    private javax.swing.JPanel homePanel;
     private javax.swing.JPanel hospitalTab;
     private javax.swing.JTable hospitalTable;
     private javax.swing.JScrollPane hospitalTableBox;
     private javax.swing.JScrollPane infoPatientTableBox;
     private javax.swing.JScrollPane infoStaffTableBox;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1664,6 +1841,9 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    public javax.swing.JLabel loginLabel;
+    private javax.swing.JPanel loginPanel;
+    private javax.swing.JPanel mainPanel;
     private javax.swing.JTextField pAmount;
     private javax.swing.JTextField pBillNum;
     private javax.swing.JTable pBills;
@@ -1714,6 +1894,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel pTypeLab;
     private javax.swing.JTextField pZip;
     private javax.swing.JLabel pZipLab;
+    private javax.swing.JPasswordField passField;
     private javax.swing.JButton patientInfoButton;
     private javax.swing.JTable patientInfoTable;
     private javax.swing.JTabbedPane patientMultTab;
@@ -1781,5 +1962,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JPanel updatePatientTab;
     private javax.swing.JPanel updateStaffTab;
+    private javax.swing.JFormattedTextField userField;
     // End of variables declaration//GEN-END:variables
 }
