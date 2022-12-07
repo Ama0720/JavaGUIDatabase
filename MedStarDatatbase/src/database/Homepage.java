@@ -221,6 +221,7 @@ public class Homepage extends javax.swing.JFrame {
         pHospNum = new javax.swing.JComboBox<>();
         pRoomNum = new javax.swing.JComboBox<>();
         pDoc = new javax.swing.JComboBox<>();
+        pClearButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Homepage");
@@ -477,6 +478,7 @@ public class Homepage extends javax.swing.JFrame {
 
             }
         ));
+        staffInfoTable.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         infoStaffTableBox.setViewportView(staffInfoTable);
 
         allStaff.add(infoStaffTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 570, 150));
@@ -509,9 +511,12 @@ public class Homepage extends javax.swing.JFrame {
 
             }
         ));
+        sExtraInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sExtraInfo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        sExtraInfo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane5.setViewportView(sExtraInfo);
 
-        allStaff.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 570, 100));
+        allStaff.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 570, 70));
 
         sPhones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -661,7 +666,7 @@ public class Homepage extends javax.swing.JFrame {
         sPhoneLab.setText("Phone Number");
         updateStaffTab.add(sPhoneLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
 
-        sPhone.setText("+1 ### ### ####");
+        sPhone.setText("+# ### ### ####");
         updateStaffTab.add(sPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 210, -1));
 
         sEmergLab.setText("Emergency Contact");
@@ -834,6 +839,7 @@ public class Homepage extends javax.swing.JFrame {
 
             }
         ));
+        patientInfoTable.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         infoPatientTableBox.setViewportView(patientInfoTable);
 
         allPatients.add(infoPatientTableBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 570, 150));
@@ -1126,6 +1132,15 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
         updatePatientTab.add(pDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 130, -1));
+
+        pClearButton.setBackground(new java.awt.Color(82, 113, 255));
+        pClearButton.setText("Clear Fields");
+        pClearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pClearButtonActionPerformed(evt);
+            }
+        });
+        updatePatientTab.add(pClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 140, 40));
 
         patientMultTab.addTab("Add New Patient", updatePatientTab);
 
@@ -1528,7 +1543,7 @@ public class Homepage extends javax.swing.JFrame {
         if (selected > -1){
         String SSN = (String)staffTable.getValueAt(selected, 0);
         String title = (String)staffTable.getValueAt(selected, 2);
-        staffInfoTable.setModel(makeDataTable("SELECT *, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS Age FROM Person, Staff WHERE SSN='"+SSN+"' AND eSSN=SSN"));
+
         
         sPhones.setModel(makeTable("SELECT phoneNo FROM Person, Person_PhoneNo WHERE SSN = '"+SSN+"' AND SSN=perSSN"));
         sContact.setModel(makeTable("SELECT emergencyConact FROM Person, Person_EmergencyContact WHERE SSN = '"+SSN+"' AND SSN=perSSN"));
@@ -1536,38 +1551,24 @@ public class Homepage extends javax.swing.JFrame {
         staffUpdateButton.setEnabled(true);
         sDelete.setEnabled(true);
         
-        
         if (title.equals("Doctor")){
+            staffInfoTable.setModel(makeDataTable("SELECT *, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS Age FROM Person p, Staff s, Doctor d WHERE p.SSN='"+SSN+"' AND s.eSSN=p.SSN AND p.SSN = d.SSN"));
+
             sExtraInfo.setModel(makeTable("SELECT patSSN as Patient, room as Room, hospital as Hospital, TIMESTAMPDIFF(YEAR, p.dob, CURDATE()) AS 'Patient Age' FROM Doctor d, Care c, Person p WHERE d.SSN='"+SSN+"' AND d.SSN = c.dSSN AND c.patSSN = p.SSN"));
-            sExtraInfo2.setModel(makeTable("SELECT permanent as Permanent FROM Doctor WHERE SSN='"+SSN+"'"));
+            sExtraInfo2.setModel(makeTable("SELECT medicalLicense as Licenses FROM Doctor_License WHERE docSSN='"+SSN+"'"));            
+
         }
         else if (title.equals("Nurse")){
+            staffInfoTable.setModel(makeDataTable("SELECT *, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS Age FROM Person p, Staff s, Nurse d WHERE p.SSN='"+SSN+"' AND s.eSSN=p.SSN AND p.SSN = d.SSN"));
+
             sExtraInfo.setModel(makeTable("SELECT docSSN as 'Doctors Assisting' FROM Doctor_Nurse_Assist WHERE nSSN = '"+SSN+"'"));
-            sExtraInfo2.setModel(makeTable("SELECT degree as Degree FROM Nurse WHERE SSN='"+SSN+"'"));
+            sExtraInfo2.setModel(new javax.swing.table.DefaultTableModel(new Object [][] {{},{},{},{}},new String [] {}));
         }
-        else{
-            sExtraInfo.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                    {},
-                    {},
-                    {},
-                    {}
-                },
-                new String [] {
+        else{            
+            staffInfoTable.setModel(makeDataTable("SELECT *, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS Age FROM Person, Staff WHERE SSN='"+SSN+"' AND eSSN=SSN"));
 
-                }
-            ));
-            sExtraInfo2.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                    {},
-                    {},
-                    {},
-                    {}
-                },
-                new String [] {
-
-                }
-            ));
+            sExtraInfo.setModel(new javax.swing.table.DefaultTableModel(new Object [][] {{},{},{},{}},new String [] {}));
+            sExtraInfo2.setModel(new javax.swing.table.DefaultTableModel(new Object [][] {{},{},{},{}},new String [] {}));
         }
         }else{
             JOptionPane.showMessageDialog(null, "No staff member selected.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1671,21 +1672,20 @@ public class Homepage extends javax.swing.JFrame {
 
     private void sClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sClearButtonActionPerformed
         // TODO add your handling code here:
-        sSsn.setText("");
+        sSsn.setText("#########");
         sFName.setText("");
         sMInit.setText("");
         sLName.setText("");
-        sSsn.setText("");
-        sPhone.setText("");
-        sEmergency.setText("");
-        sDob.setText("");
+        sPhone.setText("+# ### ### ####");
+        sEmergency.setText("+# ### ### ####");
+        sDob.setText("YYYY-MM-dd");
         sStreet.setText("");
         sStreet2.setText("");
         sCity.setText("");
         sState.setText("");
         sZip.setText("");
         sSalary.setText("");
-        sHireDate.setText("");
+        sHireDate.setText("YYYY-MM-dd");
         sDocLic.setText("");
         sNurseDegree.setText("");
         
@@ -2030,6 +2030,31 @@ public class Homepage extends javax.swing.JFrame {
         hDeptList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{""}));
     }//GEN-LAST:event_hButtonActionPerformed
 
+    private void pClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pClearButtonActionPerformed
+        // TODO add your handling code here:
+        pSsn.setText("#########");
+        pFName.setText("");
+        pMInit.setText("");
+        pLName.setText("");
+        pPhone.setText("+# ### ### ####");
+        pEmergency.setText("+# ### ### ####");
+        pDob.setText("YYYY-MM-dd");
+        pStreet.setText("");
+        pStreet2.setText("");
+        pCity.setText("");
+        pState.setText("");
+        pZip.setText("");
+        pCheckIn.setText("YYYY-MM-dd hh:mm:ss");
+        pCheckOut.setText("YYYY-MM-dd hh:mm:ss");
+        pInsurance.setText("");
+        
+        pHospNum.setSelectedIndex(-1);
+        pRoomNum.setSelectedIndex(-1);
+        sGender.setSelectedIndex(-1);
+        pDoc.setSelectedIndex(-1);
+        pType.setSelectedIndex(-1);
+    }//GEN-LAST:event_pClearButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2141,6 +2166,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel pCheckOutLab;
     private javax.swing.JTextField pCity;
     private javax.swing.JLabel pCityLab;
+    private javax.swing.JButton pClearButton;
     private javax.swing.JTable pContactTable;
     private javax.swing.JButton pDelete;
     private javax.swing.JTextField pDescription;
