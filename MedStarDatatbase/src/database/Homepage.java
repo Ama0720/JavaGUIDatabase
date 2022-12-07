@@ -56,6 +56,7 @@ public class Homepage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane15 = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         passField = new javax.swing.JPasswordField();
@@ -68,13 +69,21 @@ public class Homepage extends javax.swing.JFrame {
         homePanel = new javax.swing.JPanel();
         tabs = new javax.swing.JTabbedPane();
         hospitalTab = new javax.swing.JPanel();
-        hospitalTableBox = new javax.swing.JScrollPane();
+        jScrollPane13 = new javax.swing.JScrollPane();
         hospitalTable = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         hDepartments = new javax.swing.JTable();
         hButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         hTypes = new javax.swing.JTable();
+        hManagerList = new javax.swing.JComboBox<>();
+        hManagerButton = new javax.swing.JButton();
+        hDeptList = new javax.swing.JComboBox<>();
+        hDirectorList = new javax.swing.JComboBox<>();
+        hDirectorButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         staffTab = new javax.swing.JPanel();
         staffMultTab = new javax.swing.JTabbedPane();
         allStaff = new javax.swing.JPanel();
@@ -90,6 +99,9 @@ public class Homepage extends javax.swing.JFrame {
         sPhones = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
         sContact = new javax.swing.JTable();
+        sDelete = new javax.swing.JButton();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        sExtraInfo2 = new javax.swing.JTable();
         updateStaffTab = new javax.swing.JPanel();
         sFNameLab = new javax.swing.JLabel();
         sFName = new javax.swing.JTextField();
@@ -166,6 +178,7 @@ public class Homepage extends javax.swing.JFrame {
         pContactTable = new javax.swing.JTable();
         jScrollPane10 = new javax.swing.JScrollPane();
         pTotalCharge = new javax.swing.JTable();
+        pDelete = new javax.swing.JButton();
         updatePatientTab = new javax.swing.JPanel();
         pFNameLab = new javax.swing.JLabel();
         pFName = new javax.swing.JTextField();
@@ -212,10 +225,13 @@ public class Homepage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Homepage");
         setBackground(new java.awt.Color(99, 187, 191));
+        setSize(new java.awt.Dimension(0, 0));
 
-        mainPanel.setMinimumSize(new java.awt.Dimension(672, 1073));
+        jScrollPane15.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        mainPanel.setMinimumSize(new java.awt.Dimension(0, 0));
         mainPanel.setOpaque(false);
-        mainPanel.setPreferredSize(new java.awt.Dimension(672, 1073));
+        mainPanel.setPreferredSize(new java.awt.Dimension(672, 750));
         mainPanel.setLayout(new java.awt.CardLayout());
 
         loginPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -297,18 +313,16 @@ public class Homepage extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
 
         mainPanel.add(loginPanel, "login");
-
-        hospitalTableBox.setBackground(new java.awt.Color(153, 255, 153));
 
         hospitalTable.setModel(makeTable("SELECT hNo as Number, hName as Hospital FROM Hospital;"));
         hospitalTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         hospitalTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         hospitalTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        hospitalTableBox.setViewportView(hospitalTable);
+        jScrollPane13.setViewportView(hospitalTable);
 
         hDepartments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -343,36 +357,95 @@ public class Homepage extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(hTypes);
 
+        hManagerList.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN FROM Manager")));
+        hManagerList.setEnabled(false);
+
+        hManagerButton.setText("Set Manager");
+        hManagerButton.setEnabled(false);
+        hManagerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hManagerButtonActionPerformed(evt);
+            }
+        });
+
+        hDeptList.setEnabled(false);
+
+        hDirectorList.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN FROM Director")));
+        hDirectorList.setEnabled(false);
+
+        hDirectorButton.setText("Set Director");
+        hDirectorButton.setEnabled(false);
+        hDirectorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hDirectorButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Department");
+
+        jLabel4.setText("Managers");
+
+        jLabel5.setText("Directors");
+
         javax.swing.GroupLayout hospitalTabLayout = new javax.swing.GroupLayout(hospitalTab);
         hospitalTab.setLayout(hospitalTabLayout);
         hospitalTabLayout.setHorizontalGroup(
             hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hospitalTabLayout.createSequentialGroup()
+            .addGroup(hospitalTabLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hospitalTabLayout.createSequentialGroup()
-                        .addComponent(hButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hospitalTabLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane4)
-                            .addComponent(hospitalTableBox, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(56, 56, 56))))
+                    .addComponent(hButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(hospitalTabLayout.createSequentialGroup()
+                            .addGroup(hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(hospitalTabLayout.createSequentialGroup()
+                                    .addComponent(hDeptList, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(hManagerList, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(hManagerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(hospitalTabLayout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(hospitalTabLayout.createSequentialGroup()
+                                    .addComponent(hDirectorList, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(hDirectorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+                                .addGroup(hospitalTabLayout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         hospitalTabLayout.setVerticalGroup(
             hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(hospitalTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(hospitalTableBox, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(hButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(559, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(hospitalTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hManagerList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hManagerButton)
+                    .addComponent(hDeptList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hDirectorList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hDirectorButton))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         tabs.addTab("Hospital", hospitalTab);
@@ -469,6 +542,30 @@ public class Homepage extends javax.swing.JFrame {
         jScrollPane7.setViewportView(sContact);
 
         allStaff.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, 200, 50));
+
+        sDelete.setText("Delete Staff");
+        sDelete.setEnabled(false);
+        sDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sDeleteActionPerformed(evt);
+            }
+        });
+        allStaff.add(sDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 110, 30));
+
+        sExtraInfo2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane11.setViewportView(sExtraInfo2);
+
+        allStaff.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, 170, 50));
 
         staffMultTab.addTab("All Staff", allStaff);
 
@@ -631,7 +728,7 @@ public class Homepage extends javax.swing.JFrame {
         });
         updateStaffTab.add(sDocList, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, -1, -1));
 
-        sTLSsn.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT v.SSN FROM TeamLead v, Person p WHERE v.SSN=p.SSN")));
+        sTLSsn.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN FROM TeamLead")));
         sTLSsn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sTLSsnActionPerformed(evt);
@@ -678,7 +775,7 @@ public class Homepage extends javax.swing.JFrame {
         sGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
         updateStaffTab.add(sGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 90, -1));
 
-        sSuperSsn.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT v.SSN FROM Supervisor v, Person p WHERE v.SSN=p.SSN")));
+        sSuperSsn.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN FROM Supervisor")));
         sSuperSsn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sSuperSsnActionPerformed(evt);
@@ -703,7 +800,7 @@ public class Homepage extends javax.swing.JFrame {
             staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, staffTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(staffMultTab)
+                .addComponent(staffMultTab, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
                 .addContainerGap())
         );
         staffTabLayout.setVerticalGroup(
@@ -855,9 +952,19 @@ public class Homepage extends javax.swing.JFrame {
 
             }
         ));
+        pTotalCharge.setEnabled(false);
         jScrollPane10.setViewportView(pTotalCharge);
 
         allPatients.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, 170, 50));
+
+        pDelete.setText("Delete Patient");
+        pDelete.setEnabled(false);
+        pDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pDeleteActionPerformed(evt);
+            }
+        });
+        allPatients.add(pDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 130, 30));
 
         patientMultTab.addTab("All Patients", allPatients);
 
@@ -1012,7 +1119,7 @@ public class Homepage extends javax.swing.JFrame {
 
         updatePatientTab.add(pRoomNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, -1, -1));
 
-        pDoc.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT v.SSN FROM Doctor v, Person p WHERE v.SSN=p.SSN")));
+        pDoc.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN FROM Doctor")));
         pDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pDocActionPerformed(evt);
@@ -1028,7 +1135,7 @@ public class Homepage extends javax.swing.JFrame {
             patientTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, patientTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(patientMultTab)
+                .addComponent(patientMultTab, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
                 .addContainerGap())
         );
         patientTabLayout.setVerticalGroup(
@@ -1055,26 +1162,22 @@ public class Homepage extends javax.swing.JFrame {
             .addGroup(homePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabs)
-                .addContainerGap())
+                .addGap(45, 45, 45))
         );
 
         mainPanel.add(homePanel, "home");
+
+        jScrollPane15.setViewportView(mainPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
         );
 
         pack();
@@ -1377,18 +1480,24 @@ public class Homepage extends javax.swing.JFrame {
                     case "Doctor":
                         s.insert("INSERT INTO Doctor VALUES ("+doctor+")");
                         s.insert("INSERT INTO Doctor_License VALUES ("+doctorLic+")");
+                        sDocList.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN from Doctor")));
+                        pDoc.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN FROM Doctor")));
                         break;
                     case "Manager":
                         s.insert("INSERT INTO Manager VALUES ('"+sSsn.getText()+"')");
+                        hManagerList.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN FROM Manager")));
                         break;
                     case "Director":
                         s.insert("INSERT INTO Director VALUES ('"+sSsn.getText()+"')");
+                        hDirectorList.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN FROM Director")));
                         break;
                     case "Supervisor":
                         s.insert("INSERT INTO Supervisor VALUES ('"+sSsn.getText()+"')");
+                        sSuperSsn.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN FROM Supervisor")));
                         break;
                     case "Team Lead":
                         s.insert("INSERT INTO TeamLead VALUES ('"+sSsn.getText()+"')");
+                        sTLSsn.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT SSN FROM TeamLead")));
                         break;
                     default:
                         break;
@@ -1408,7 +1517,7 @@ public class Homepage extends javax.swing.JFrame {
 
     public void updateTables(){
         staffTable.setModel(makeTable("SELECT DISTINCT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name, title as Title FROM Staff, Person WHERE SSN=eSSN"));
-        patientTable.setModel(makeTable("SELECT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name, SUM(amount) as 'Total Charges' FROM Person p, Patient pat, Bill_Charges bc WHERE p.SSN=pat.pSSN AND p.SSN=bc.pSSN GROUP BY SSN")); 
+        patientTable.setModel(makeTable("SELECT SSN, CONCAT(fname,' ', mint,'. ', lname) as Name FROM Person p, Patient pat  WHERE p.SSN=pat.pSSN")); 
     }
     
     
@@ -1425,13 +1534,18 @@ public class Homepage extends javax.swing.JFrame {
         sContact.setModel(makeTable("SELECT emergencyConact FROM Person, Person_EmergencyContact WHERE SSN = '"+SSN+"' AND SSN=perSSN"));
         
         staffUpdateButton.setEnabled(true);
+        sDelete.setEnabled(true);
         
         
-        if (title.equals("Doctor"))
+        if (title.equals("Doctor")){
             sExtraInfo.setModel(makeTable("SELECT patSSN as Patient, room as Room, hospital as Hospital, TIMESTAMPDIFF(YEAR, p.dob, CURDATE()) AS 'Patient Age' FROM Doctor d, Care c, Person p WHERE d.SSN='"+SSN+"' AND d.SSN = c.dSSN AND c.patSSN = p.SSN"));
-        else if (title.equals("Nurse"))
+            sExtraInfo2.setModel(makeTable("SELECT permanent as Permanent FROM Doctor WHERE SSN='"+SSN+"'"));
+        }
+        else if (title.equals("Nurse")){
             sExtraInfo.setModel(makeTable("SELECT docSSN as 'Doctors Assisting' FROM Doctor_Nurse_Assist WHERE nSSN = '"+SSN+"'"));
-        else
+            sExtraInfo2.setModel(makeTable("SELECT degree as Degree FROM Nurse WHERE SSN='"+SSN+"'"));
+        }
+        else{
             sExtraInfo.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                     {},
@@ -1443,6 +1557,18 @@ public class Homepage extends javax.swing.JFrame {
 
                 }
             ));
+            sExtraInfo2.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+                    {},
+                    {},
+                    {},
+                    {}
+                },
+                new String [] {
+
+                }
+            ));
+        }
         }else{
             JOptionPane.showMessageDialog(null, "No staff member selected.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1464,6 +1590,7 @@ public class Homepage extends javax.swing.JFrame {
         
         pTotalCharge.setModel(makeTable("SELECT SUM(bc.amount) as 'Total Charge' FROM Person p, Patient pat, Bill_Charges bc WHERE p.SSN = '"+SSN+"' AND p.SSN=pat.pSSN AND p.SSN=bc.pSSN GROUP BY SSN"));
         patientUpdateButton.setEnabled(true);
+        pDelete.setEnabled(true);
         }
         else{
             JOptionPane.showMessageDialog(null, "No patient selected.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1621,18 +1748,6 @@ public class Homepage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_pChargeButtonActionPerformed
 
-    private void hButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hButtonActionPerformed
-        // TODO add your handling code here:
-        
-        int selected = hospitalTable.getSelectedRow();
-        String num = (String)hospitalTable.getValueAt(selected, 0);
-        hDepartments.setModel(makeTable("SELECT DISTINCT dName as Department, CONCAT(p.fname,' ', p.mint,'. ', p.lname) as Manager, CONCAT(p2.fname,' ', p2.mint,'. ', p2.lname) as Director FROM Hospital h, Department d, Manager m, Director dir, Staff s, Staff s2, Person p, Person p2 WHERE h.hNo='"+num+"' AND h.hNo=d.hNum AND d.mSSN = m.SSN AND m.SSN = s.eSSN AND s.eSSN = p.SSN AND d.dirSSN = dir.SSN AND dir.SSN = s2.eSSN AND s2.eSSN = p2.SSN;"));
-        
-        hTypes.setModel(makeTable("SELECT ptype as 'Patient Type', COUNT(*) as 'Number of Patients' FROM Hospital h, Staff s, Doctor doc, Care c, Patient p WHERE h.hNo='"+num+"' AND h.hNo=s.hNo AND s.eSSN=doc.SSN AND doc.SSN=c.dSSN AND c.patSSN=p.pSSN GROUP BY pType;"));
-        
-        
-    }//GEN-LAST:event_hButtonActionPerformed
-
     private void staffUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffUpdateButtonActionPerformed
         // TODO add your handling code here:
         if (staffTable.getSelectedRow() == -1){
@@ -1783,6 +1898,138 @@ public class Homepage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_userFieldPropertyChange
 
+    private void sDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sDeleteActionPerformed
+        // TODO add your handling code here:
+        if (staffTable.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "No staff member selected.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            int num = staffInfoTable.getRowCount();
+            String SSN = staffInfoTable.getValueAt(0,1).toString();
+            String title = staffInfoTable.getValueAt(12,1).toString();
+            System.out.println(title);
+            
+            if(title.equals("Doctor")){
+                s.insert("DELETE FROM Doctor_License WHERE docSSN='"+SSN+"'");
+                s.insert("DELETE FROM Doctor_Nurse_Assist WHERE docSSN='"+SSN+"'");
+                s.insert("DELETE FROM Care_Treatment WHERE docSSN='"+SSN+"'");
+                s.insert("DELETE FROM Care WHERE dSSN='"+SSN+"'");
+                s.insert("DELETE FROM Doctor WHERE SSN='"+SSN+"'");
+            }
+            else if (title.equals("Nurse")){
+                s.insert("DELETE FROM Doctor_Nurse_Assist WHERE nSSN='"+SSN+"'");
+                s.insert("DELETE FROM Nurse WHERE SSN='"+SSN+"'");
+            }
+            else if (title.equals("Team Lead")){
+                s.insert("UPDATE Staff SET tlSSN=NULL WHERE tlSSN='"+SSN+"'");
+                s.insert("DELETE FROM TeamLead WHERE SSN='"+SSN+"'");
+            }
+            else if (title.equals("Supervisor")){
+                s.insert("UPDATE Staff SET superSSN=NULL WHERE superSSN='"+SSN+"'");
+                s.insert("DELETE FROM Supervisor WHERE SSN='"+SSN+"'");
+            }
+            else if (title.equals("Manager")){
+                s.insert("UPDATE Department SET mSSN=NULL WHERE mSSN='"+SSN+"'");
+                s.insert("DELETE FROM Manager WHERE SSN='"+SSN+"'");
+            }
+            else if (title.equals("Director")){
+                s.insert("UPDATE Department SET dirSSN=NULL WHERE dirSSN='"+SSN+"'");
+                s.insert("DELETE FROM Manager WHERE SSN='"+SSN+"'");
+            }
+            
+            s.insert("DELETE FROM Staff WHERE eSSN='"+SSN+"'");
+            s.insert("DELETE FROM Person_PhoneNo WHERE perSSN='"+SSN+"'");
+            s.insert("DELETE FROM Person_EmergencyContact WHERE perSSN='"+SSN+"'");
+            s.insert("DELETE FROM Person WHERE SSN='"+SSN+"'");
+            
+            updateTables();
+        }
+    }//GEN-LAST:event_sDeleteActionPerformed
+
+    private void pDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pDeleteActionPerformed
+        // TODO add your handling code here:        
+        if (patientTable.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "No patient selected.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            String SSN = patientInfoTable.getValueAt(0,1).toString();
+
+            
+            s.insert("DELETE FROM Bill_Charges WHERE pSSN='"+SSN+"'");
+            s.insert("DELETE FROM Bill WHERE patSSN='"+SSN+"'");
+            s.insert("DELETE FROM Care_Treatment WHERE pSSN='"+SSN+"'");
+            s.insert("DELETE FROM Care WHERE patSSN='"+SSN+"'");
+            s.insert("DELETE FROM Patient WHERE pSSN='"+SSN+"'");
+            s.insert("DELETE FROM Person_PhoneNo WHERE perSSN='"+SSN+"'");
+            s.insert("DELETE FROM Person_EmergencyContact WHERE perSSN='"+SSN+"'");
+            s.insert("DELETE FROM Person WHERE SSN='"+SSN+"'");
+            
+            updateTables();
+        }
+    }//GEN-LAST:event_pDeleteActionPerformed
+
+    private void hDirectorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hDirectorButtonActionPerformed
+        // TODO add your handling code here:
+        try{
+            String hNo = hDepartments.getValueAt(0,0).toString();
+            String dept = hDeptList.getSelectedItem().toString();
+            String dir;
+            try {dir = hDirectorList.getSelectedItem().toString();} catch(NullPointerException e){ dir="null";}
+
+            if (!dir.equals("null")) dir = "'"+dir+"'";
+            s.insert("UPDATE Department SET dirSSN = NULL WHERE dirSSN ="+dir);
+            s.insert("UPDATE Department SET dirSSN = "+dir+" WHERE dNo ='"+dept+"'");
+
+            hDepartments.setModel(makeTable("SELECT DISTINCT hNo as Hospital, dNo as Department, dName as Name, IFNULL(mSSN, 'No Manager') as Manager, IFNULL(dirSSN, 'No Director') as Director FROM Hospital h, Department d, Person p, Person p2 WHERE h.hNo='"+hNo+"' AND h.hNo=d.hNum"));
+
+        }
+        catch (NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Not all fields selected.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_hDirectorButtonActionPerformed
+
+    private void hManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hManagerButtonActionPerformed
+        // TODO add your handling code here:
+        try{
+            String hNo = hDepartments.getValueAt(0,0).toString();
+            String dept = hDeptList.getSelectedItem().toString();
+            String mgr;
+            try {mgr = hManagerList.getSelectedItem().toString();} catch(NullPointerException e){ mgr="null";}
+
+            if (!mgr.equals("null")) mgr = "'"+mgr+"'";
+            s.insert("UPDATE Department SET mSSN = NULL WHERE mSSN ="+mgr);
+            s.insert("UPDATE Department SET mSSN = "+mgr+" WHERE dNo ='"+dept+"'");
+
+            hDepartments.setModel(makeTable("SELECT DISTINCT hNo as Hospital, dNo as Department, dName as Name, IFNULL(mSSN, 'No Manager') as Manager, IFNULL(dirSSN, 'No Director') as Director FROM Hospital h, Department d, Person p, Person p2 WHERE h.hNo='"+hNo+"' AND h.hNo=d.hNum"));
+
+        }
+        catch (NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Not all fields selected.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_hManagerButtonActionPerformed
+
+    private void hButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hButtonActionPerformed
+        // TODO add your handling code here:
+
+        int selected = hospitalTable.getSelectedRow();
+        String num = (String)hospitalTable.getValueAt(selected, 0);
+        hDepartments.setModel(makeTable("SELECT DISTINCT hNo as Hospital, dNo as Department, dName as Name, IFNULL(mSSN, 'No Manager') as Manager, IFNULL(dirSSN, 'No Director') as Director FROM Hospital h, Department d, Person p, Person p2 WHERE h.hNo='"+num+"' AND h.hNo=d.hNum"));
+
+        hTypes.setModel(makeTable("SELECT ptype as 'Patient Type', COUNT(*) as 'Number of Patients' FROM Hospital h, Staff s, Doctor doc, Care c, Patient p WHERE h.hNo='"+num+"' AND h.hNo=s.hNo AND s.eSSN=doc.SSN AND doc.SSN=c.dSSN AND c.patSSN=p.pSSN GROUP BY pType;"));
+
+        hManagerButton.setEnabled(true);
+        hManagerList.setEnabled(true);
+        hDeptList.setEnabled(true);
+        hDirectorList.setEnabled(true);
+        hDirectorButton.setEnabled(true);
+
+        if (selected > -1)
+        hDeptList.setModel(new javax.swing.DefaultComboBoxModel<>(makeList("SELECT DISTINCT dNo from Department, Hospital WHERE hNum = '"+num+"'")));
+
+        else
+        hDeptList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{""}));
+    }//GEN-LAST:event_hButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1850,19 +2097,29 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JScrollPane dispStaffTableBox;
     private javax.swing.JButton hButton;
     private javax.swing.JTable hDepartments;
+    private javax.swing.JComboBox<String> hDeptList;
+    private javax.swing.JButton hDirectorButton;
+    private javax.swing.JComboBox<String> hDirectorList;
+    private javax.swing.JButton hManagerButton;
+    private javax.swing.JComboBox<String> hManagerList;
     private javax.swing.JTable hTypes;
     private javax.swing.JPanel homePanel;
     private javax.swing.JPanel hospitalTab;
     private javax.swing.JTable hospitalTable;
-    private javax.swing.JScrollPane hospitalTableBox;
     private javax.swing.JScrollPane infoPatientTableBox;
     private javax.swing.JScrollPane infoStaffTableBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1871,7 +2128,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JLabel loginLabel;
+    public javax.swing.JLabel loginLabel;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextField pAmount;
@@ -1885,6 +2142,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JTextField pCity;
     private javax.swing.JLabel pCityLab;
     private javax.swing.JTable pContactTable;
+    private javax.swing.JButton pDelete;
     private javax.swing.JTextField pDescription;
     private javax.swing.JFormattedTextField pDob;
     private javax.swing.JLabel pDobLab;
@@ -1936,6 +2194,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel sCityLab;
     private javax.swing.JButton sClearButton;
     private javax.swing.JTable sContact;
+    private javax.swing.JButton sDelete;
     private javax.swing.JComboBox<String> sDeptNum;
     private javax.swing.JLabel sDeptNumLab;
     private javax.swing.JFormattedTextField sDob;
@@ -1947,6 +2206,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel sEmergLab;
     private javax.swing.JTextField sEmergency;
     private javax.swing.JTable sExtraInfo;
+    private javax.swing.JTable sExtraInfo2;
     private javax.swing.JTextField sFName;
     private javax.swing.JLabel sFNameLab;
     private javax.swing.JLabel sGenLab;
