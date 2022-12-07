@@ -1943,6 +1943,7 @@ public class Homepage extends javax.swing.JFrame {
             s.insert("DELETE FROM Person WHERE SSN='"+SSN+"'");
             
             updateTables();
+            JOptionPane.showMessageDialog(null, "Staff Member Deleted.");
         }
     }//GEN-LAST:event_sDeleteActionPerformed
 
@@ -1965,6 +1966,7 @@ public class Homepage extends javax.swing.JFrame {
             s.insert("DELETE FROM Person WHERE SSN='"+SSN+"'");
             
             updateTables();
+            JOptionPane.showMessageDialog(null, "Patient Deleted.");
         }
     }//GEN-LAST:event_pDeleteActionPerformed
 
